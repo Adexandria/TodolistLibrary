@@ -8,6 +8,6 @@ namespace TasksLibrary.Models
 {
     public class BaseClass
     {
-        public Guid Id { get; set; }
+        public virtual Guid Id { get; set; }
     }
 }

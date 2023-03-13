@@ -11,11 +11,11 @@
             IsRevoked = DateTime.UtcNow > Expires;
             
         }
-        public string Salt { get; set; }
-        public string Token { get; set; }
-        public DateTime Expires { get; set; }
-        public bool IsRevoked { get; set; }
-        public UserId UserId { get; set; }  
+        public virtual string Salt { get; set; }
+        public virtual string Token { get; set; }
+        public virtual DateTime Expires { get; set; }
+        public virtual bool IsRevoked { get; set; }
+        public virtual UserId UserId { get; set; }  
     }
 }
 

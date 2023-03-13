@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace TasksLibrary.Models.Interfaces
 {
-    public interface IAuthToken
+    public class AccessRepository
     {
-        string GenerateAccessToken(User user);
-        string GenerateRefreshToken();
-        string VerifyToken(string token);
+        public IUserRepository  UserRepository { get;set;}
+        public IAuthToken AuthToken { get; set; }
         
         
     }

@@ -17,6 +17,8 @@ namespace TasksLibrary.NHibernate.Migrations
                 .WithColumn("Email").AsString(255).NotNullable()
                 .WithColumn("Name").AsString(255).NotNullable()
                 .WithColumn("AccessTokenId").AsGuid().Nullable()
+                .WithColumn("PasswordHash").AsString(255).NotNullable()
+                .WithColumn("Salt").AsString(255).NotNullable()
                 .WithColumn("RefreshTokenId").AsGuid().Nullable();
 
             Create.Table("AccessTokens")
@@ -32,12 +34,12 @@ namespace TasksLibrary.NHibernate.Migrations
                 .WithColumn("UserId").AsGuid().Nullable();
 
             Create.ForeignKey("FK_User_AccessToken")
-                .FromTable("User").ForeignColumn("AccessTokenId")
-                .ToTable("AccessToken").PrimaryColumn("Id");
+                .FromTable("Users").ForeignColumn("AccessTokenId")
+                .ToTable("AccessTokens").PrimaryColumn("Id");
             
             Create.ForeignKey("FK_User_RefreshToken")
-                .FromTable("User").ForeignColumn("RefreshTokenId")
-                  .ToTable("RefreshToken").PrimaryColumn("Id");
+                .FromTable("Users").ForeignColumn("RefreshTokenId")
+                  .ToTable("RefreshTokens").PrimaryColumn("Id");
         }
     }
 }

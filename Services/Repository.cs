@@ -31,11 +31,6 @@ namespace TasksLibrary.Services
             Session.Delete(entity);
         }
 
-        public T GetById(int id)
-        {
-            return Session.Get<T>(id);
-        }
-
         public IEnumerable<T> GetAll()
         {
             return Session.Query<T>();

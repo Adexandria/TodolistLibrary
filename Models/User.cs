@@ -14,11 +14,12 @@ namespace TasksLibrary.Models
             Name = name;
             Email = email;
         }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public RefreshToken RefreshToken { get; set; }
-        public AccessToken AccessToken { get; set; }
-        public string PasswordHash { get; set; }
+        public virtual string Name { get; set; }
+        public virtual string Email { get; set; }
+        public virtual RefreshToken RefreshToken { get; set; }
+        public virtual AccessToken AccessToken { get; set; }
+        public virtual string PasswordHash { get; set; }
+        public virtual string Salt { get; set; }
         
         
         public string HashPassword(string password, out string salt)
