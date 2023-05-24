@@ -21,7 +21,7 @@ namespace TasksLibrary.Services
             {
                 Claims = new Dictionary<string, object>()
                 {
-                    { "Id", user.Id }
+                    { "Id", user.Id.ToString("N") }
                 },
                 Expires = DateTime.UtcNow.AddMinutes(5),
                 SigningCredentials = new SigningCredentials(GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256Signature)
