@@ -8,12 +8,11 @@ using TasksLibrary.Models;
 
 namespace TasksLibrary.NHibernate.Mappings
 {
-    public class UserMap : ClassMap<User>
+    public class UserMap : ClassMapping<User>
     {
         public UserMap()
         {
             Table("Users");
-            Id(s => s.Id).GeneratedBy.GuidComb();
             Map(s => s.Email);
             Map(s => s.Name);
             Map(s => s.PasswordHash);

@@ -8,12 +8,11 @@ using TasksLibrary.Models;
 
 namespace TasksLibrary.NHibernate.Mappings
 {
-    public class AccessTokenMap : ClassMap<AccessToken>
+    public class AccessTokenMap : ClassMapping<AccessToken>
     {
         public AccessTokenMap()
         {
             Table("AccessTokens");
-            Id(s => s.Id).GeneratedBy.GuidComb();
             Map(s => s.Token);
             Component(m => m.UserId, p =>
             {

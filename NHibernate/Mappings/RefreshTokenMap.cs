@@ -8,12 +8,11 @@ using TasksLibrary.Models;
 
 namespace TasksLibrary.NHibernate.Mappings
 {
-    public class RefreshTokenMap : ClassMap<RefreshToken>
+    public class RefreshTokenMap : ClassMapping<RefreshToken>
     {
         public RefreshTokenMap()
         {
             Table("RefreshTokens");
-            Id(s => s.Id).GeneratedBy.GuidComb();
             Map(s => s.Expires);
             Map(s => s.IsRevoked);
             Map(s => s.Token);
