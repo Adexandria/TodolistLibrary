@@ -1,36 +1,66 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
+using TasksLibrary.Services.Architecture.Database;
 
 namespace TasksLibrary.Extensions
 {
-    
-    public class CommandHandler<TCommand, TDbcontext,TResponse> : CommandHandler<TCommand,TDbcontext> where TCommand: Command<TResponse>
+
+    public abstract class CommandHandler<TCommand, TDbcontext, TResponse> : CommandHandler<TDbcontext>, ICommandHandler<TCommand, TDbcontext,TResponse>
+        where TCommand : Command<TResponse>
+        where TDbcontext : class, IDbContext
     {
-        public TDbcontext DbContext;
-        public virtual Task<ActionResult<TResponse>> HandleCommand()
+
+        public abstract Task<ActionResult<TResponse>> HandleCommand(TCommand command);
+        protected  ActionResult<TResponse> FailedOperation(string error)
         {
-            return Task.FromResult(new ActionResult<TResponse>().SuccessfulOperation(default));
+            return ActionResult<TResponse>.Failed(error);
         }
-    }
-    
-    public class CommandHandler<TCommand,TDbcontext> : CommandHandler where TCommand : Command
-    {
-        public TCommand command;
-        public override Task<ActionResult> HandleCommand()
+
+        protected  ActionResult<TResponse> FailedOperation(string error, HttpStatusCode code)
         {
-            return base.HandleCommand();
+            return ActionResult<TResponse>.Failed(error,(int)code);
+        }
+        protected ActionResult<TResponse> SuccessfulOperation(TResponse response)
+        {
+            return ActionResult<TResponse>.SuccessfulOperation(response);
         }
     }
 
-    public class CommandHandler 
+    public abstract class CommandHandler<TCommand,TDbcontext> : CommandHandler<TDbcontext> , ICommandHandler<TCommand,TDbcontext>
+        where TCommand : Command
+        where TDbcontext : class,IDbContext
     {
-        public virtual Task<ActionResult> HandleCommand()
+
+        public abstract Task<ActionResult> HandleCommand(TCommand command);
+
+        protected ActionResult FailedOperation(string error)
         {
-            return Task.FromResult(new ActionResult().Successful());
+            return ActionResult.Failed(error);
+        }
+
+        protected ActionResult FailedOperation(string error, HttpStatusCode code)
+        {
+            return ActionResult.Failed(error, ((int)code));
+        }
+
+        protected ActionResult SuccessfulOperation()
+        {
+            return ActionResult.Successful();
         }
     }
+
+    public interface ICommandHandler<TCommand,TDbcontext>
+    {
+        public abstract Task<ActionResult> HandleCommand(TCommand command);
+    }
+    public interface ICommandHandler<TCommand,TDbcontext,TResponse>
+    {
+        public abstract Task<ActionResult<TResponse>> HandleCommand(TCommand command);
+    }
+
+    public abstract class CommandHandler<TDbcontext>
+    {
+        public TDbcontext Dbcontext;
+    }
+
 }
-    
+

@@ -30,8 +30,8 @@ namespace TasksLibrary.Models
         }
         public bool VerifyPassword(string password, string salt)
         {
-            var hash = HashPassword(password, out salt);
-            return BCrypt.Net.BCrypt.Verify(password, hash);
+            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password,salt);
+            return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
         }
     }
 }

@@ -9,7 +9,9 @@ namespace TasksLibrary.Models.Interfaces
     public class AccessRepository
     {
         public IUserRepository  UserRepository { get;set;}
-        public IAuthToken AuthToken { get; set; }
+        public IAuthToken AuthenTokenRepository { get; set; }
+        public IAccessTokenRepository AccessTokenRepository { get; set; }
+        public IRefreshTokenRepository RefreshTokenRepository { get; set; }
         
         
     }

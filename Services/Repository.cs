@@ -1,9 +1,5 @@
 ﻿using NHibernate;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NHibernate.Linq;
 using TasksLibrary.NHibernate;
 
 namespace TasksLibrary.Services
@@ -16,24 +12,24 @@ namespace TasksLibrary.Services
             Session = session.GetSession();
         }
 
-        public void Add(T entity)
+        public async Task Add(T entity)
         {
-            Session.Save(entity);
+            await Session.SaveOrUpdateAsync(entity);
         }
 
-        public void Update(T entity)
+        public async Task Update(T entity)
         {
-            Session.Update(entity);
+            await Session.UpdateAsync(entity);
         }
 
-        public void Delete(T entity)
+        public async Task Delete(T entity)
         {
-            Session.Delete(entity);
+            await Session.DeleteAsync(entity);
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<List<T>> GetAll()
         {
-            return Session.Query<T>();
+            return await Session.Query<T>().ToListAsync();
         }
     }
 }

@@ -7,16 +7,17 @@ namespace TasksLibrary.Application.Commands.CreateUser
     {
         public override ActionResult Validator()
         {
-            return ActionResult.IsEmail(Email, "Invalid email")
+            return new RequestValidator().IsEmail(Email, "Invalid email")
                 .IsText(Name, "Invalid name")
-                .IsText(Password, "Invalid password");
+                .IsText(Password, "Invalid password")
+                .Result;
         }
 
 
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        [Compare("Password", ErrorMessage = "Password and confri")]
+        [Compare("Password", ErrorMessage = "Password and confirm Password not question")]
         public string ConfirmPassword { get; set; }
     }
 }

@@ -12,8 +12,10 @@ namespace TasksLibrary.Application.Commands.Login
     {
         public override ActionResult Validator()
         {
-            return ActionResult.IsText(Password,"Invalid password")
-                .IsText(Email,"Invalid email");                    
+            return new RequestValidator()
+                .IsText(Password,"Invalid password")
+                .IsText(Email,"Invalid email")
+                .Result;                    
         }
 
 

@@ -11,9 +11,9 @@ namespace TasksLibrary.Services
         {
         }
 
-        public User AuthenticateUser(string email, string password)
+        public async Task<User> AuthenticateUser(string email, string password)
         {
-            var user = Session.Query<User>().FirstOrDefault(x => x.Email == email);
+            var user = await Session.Query<User>().FirstOrDefaultAsync(x => x.Email == email);
             if (user != null)
             {
                 var isVerified = user.VerifyPassword(password, user.Salt);
@@ -23,25 +23,6 @@ namespace TasksLibrary.Services
                 }
             }
             return default;
-        }
-
-        public async Task<bool> CommitAsync()
-        {
-            using var transction = Session.BeginTransaction();
-
-            try
-            {
-                if (transction.IsActive)
-                {
-                    await transction.CommitAsync();
-                }
-                return true;
-            }
-            catch (Exception ex)
-            {
-                transction.Rollback();
-                throw ex;
-            }
         }
 
         public async Task<User> GetExistingUserByEmail(string email)

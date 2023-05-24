@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TasksLibrary.Services;
 
 namespace TasksLibrary.Models.Interfaces
 {
-    public interface IUserRepository
+    public interface IUserRepository : IRepository<User>
     {
         Task<User> GetExistingUserById(Guid userId);
         Task<User> GetExistingUserByEmail(string email);
         Task<bool> IsExist(string email);
-        void Add(User user);
-        void Update(User user);
-        Task<bool> CommitAsync();
-        User AuthenticateUser(string email, string password);
+        Task<User> AuthenticateUser(string email, string password);
 
     }
 }

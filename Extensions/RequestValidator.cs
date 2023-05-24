@@ -1,39 +1,46 @@
 ﻿using System.Text.RegularExpressions;
 
-
 namespace TasksLibrary.Extensions
 {
 
-    public static class RequestValidator
+    public class RequestValidator
     {
-        public static ActionResult IsText(this ActionResult  actionResult,string s,string error)
+        public RequestValidator()
         {
-            if (string.IsNullOrEmpty(s))
-            {
-                return actionResult.Failed(error);
-            }
-            return actionResult.Successful();
+            Result = ActionResult.Successful();
+        }
+        public RequestValidator IsText(string s,string error)
+        {
+            AddCheck(!string.IsNullOrEmpty(s), error);
+            return this;
         }
 
-        public static ActionResult IsGuid(this ActionResult actionResult, Guid s, string error)
+        public RequestValidator IsGuid( Guid s, string error)
         {
             Regex regex = new("(?im)^[{(]?[0-9A-F]{8}[-]?(?:[0-9A-F]{4}[-]?){3}[0-9A-F]{12}[)}]?$");
-            if (regex.IsMatch(s.ToString()))
-            {
-                return actionResult.Successful();
-            }
-            return actionResult.Failed(error);
+            AddCheck(regex.IsMatch(s.ToString()), error);
+            return this;
 
         }
-        public static ActionResult IsEmail(this ActionResult actionResult, string s, string error)
+        public RequestValidator IsEmail(string s, string error)
         {
             Regex regex = new("^[^@\\s]+@[^@\\s]+\\.(com|net|org|gov)$");
-            if (regex.IsMatch(s))
-            {
-                return actionResult.Successful();
-            }
-            return actionResult.Failed(error);
-
+            AddCheck(regex.IsMatch(s), error);
+            return this;
         }
+
+        private void AddCheck(bool operation,string error)
+        {
+            if(!operation && Result.IsSuccessful)
+            {
+                Result = ActionResult.Failed(error);
+            }
+            else if(!operation & Result.NotSuccessful)
+            {
+                Result.AddError(error);
+            } 
+        }
+
+        public ActionResult Result;
     }
 }
