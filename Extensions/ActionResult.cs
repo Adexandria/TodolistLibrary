@@ -59,6 +59,17 @@
 
             };
         }
+        public static ActionResult<T> Failed()
+        {
+            return new ActionResult<T>()
+            {
+                StatusCode = 500,
+                IsSuccessful = false,
+                NotSuccessful = true,
+                Errors = new List<string>()
+
+            };
+        }
         public static ActionResult<T> Failed(string error, int code)
         {
             return new ActionResult<T>()
@@ -86,13 +97,13 @@
 
         }
 
-        public new ActionResult<T> AddError(string error)
+        public  ActionResult<T> AddError(string error)
         {
             Errors.Add(error);
             return this;
         }
 
-        public new ActionResult<T> AddErrors(List<string> errors)
+        public  ActionResult<T> AddErrors(List<string> errors)
         {
             if (errors == null)
                 return this;
@@ -139,6 +150,18 @@
 
             };
         }
+
+        public static ActionResult Failed()
+        {
+            return new ActionResult()
+            {
+                StatusCode = 500,
+                IsSuccessful = false,
+                NotSuccessful = true,
+                Errors = new List<string>()
+
+            };
+        }
         public static ActionResult Failed(string error,int code)
         {
             return new ActionResult()
@@ -154,13 +177,13 @@
             };
         }
 
-        public new ActionResult AddError(string error)
+        public ActionResult AddError(string error)
         {
             Errors.Add(error);
             return this;
         }
 
-        public new ActionResult AddErrors(List<string> errors)
+        public ActionResult AddErrors(List<string> errors)
         {
             if (errors == null)
                 return this;

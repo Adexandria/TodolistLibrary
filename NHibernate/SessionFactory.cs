@@ -1,31 +1,21 @@
 ﻿using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
-using Microsoft.Extensions.Configuration;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TasksLibrary.NHibernate.Mappings;
 
 namespace TasksLibrary.NHibernate
 {
     public class SessionFactory
     {
-        public SessionFactory()
+        public SessionFactory(string _connectionString)
         {
-            if (_sessionFactory is null)
-            {
-                string _connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;Database = Tasks;Integrated Security=True;Connect Timeout=30";
+            if (_sessionFactory is null);
                 _sessionFactory = BuildSessionFactory(_connectionString);
-            }
         }
 
-        public ISession GetSession() => _sessionFactory.OpenSession();
-
-        private readonly ISessionFactory _sessionFactory;
+        public ISessionFactory _sessionFactory;
+        public ISession Session => _sessionFactory.OpenSession();
 
         private ISessionFactory BuildSessionFactory(string connectionString)
         {

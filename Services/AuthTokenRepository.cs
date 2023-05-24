@@ -13,7 +13,7 @@ using TasksLibrary.NHibernate;
 
 namespace TasksLibrary.Services
 {
-    public class AuthToken :IAuthToken
+    public class AuthTokenRepository :IAuthToken
     {
         public string GenerateAccessToken(User user)
         {

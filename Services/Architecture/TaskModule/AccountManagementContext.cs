@@ -5,12 +5,17 @@ namespace TasksLibrary.Services.Architecture.TaskModule
 {
     public class AccountManagementContext : DatabaseManagementContext<AccessRepository>
     {
-        public AccountManagementContext(ISession session,
+        public AccountManagementContext(AccessRepository context,ISession session,
             IUserRepository userRepository,
-            IAuthToken authTokenRepository) : base(session)
+            IAuthToken authTokenRepository,
+            IRefreshTokenRepository refreshTokenRepository,
+            IAccessTokenRepository accessTokenRepository ) : base(session)
         {
+            Context = context;
             Context.UserRepository = userRepository;
             Context.AuthenTokenRepository = authTokenRepository;
+            context.RefreshTokenRepository = refreshTokenRepository;
+            Context.AccessTokenRepository = accessTokenRepository;
         }
        
     }

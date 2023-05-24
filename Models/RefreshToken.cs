@@ -2,7 +2,10 @@
 {
     public class RefreshToken : BaseClass
     {
+        protected RefreshToken()
+        {
 
+        }
         public RefreshToken(string token, DateTime expires, UserId userId)
         {
             Token = token;

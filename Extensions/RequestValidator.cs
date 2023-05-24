@@ -35,7 +35,7 @@ namespace TasksLibrary.Extensions
             {
                 Result = ActionResult.Failed(error);
             }
-            else if(!operation & Result.NotSuccessful)
+            else if(!operation && Result.NotSuccessful)
             {
                 Result.AddError(error);
             } 

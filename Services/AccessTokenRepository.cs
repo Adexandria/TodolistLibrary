@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NHibernate;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace TasksLibrary.Services
 {
     public class AccessTokenRepository : Repository<AccessToken>, IAccessTokenRepository
     {
-        public AccessTokenRepository(SessionFactory session) : base(session)
+        public AccessTokenRepository(ISession session) : base(session)
         {
         }
     }

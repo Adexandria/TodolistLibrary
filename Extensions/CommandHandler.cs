@@ -4,7 +4,7 @@ using TasksLibrary.Services.Architecture.Database;
 namespace TasksLibrary.Extensions
 {
 
-    public abstract class CommandHandler<TCommand, TDbcontext, TResponse> : CommandHandler<TDbcontext>, ICommandHandler<TCommand, TDbcontext,TResponse>
+    public abstract class CommandHandler<TCommand, TDbcontext, TResponse> : CommandHandler<TDbcontext>, ICommandHandler<TCommand,TResponse>
         where TCommand : Command<TResponse>
         where TDbcontext : class, IDbContext
     {
@@ -25,7 +25,7 @@ namespace TasksLibrary.Extensions
         }
     }
 
-    public abstract class CommandHandler<TCommand,TDbcontext> : CommandHandler<TDbcontext> , ICommandHandler<TCommand,TDbcontext>
+    public abstract class CommandHandler<TCommand,TDbcontext> : CommandHandler<TDbcontext> , ICommandHandler<TCommand>
         where TCommand : Command
         where TDbcontext : class,IDbContext
     {
@@ -46,20 +46,21 @@ namespace TasksLibrary.Extensions
         {
             return ActionResult.Successful();
         }
+        
     }
 
-    public interface ICommandHandler<TCommand,TDbcontext>
+    public interface ICommandHandler<TCommand>
     {
-        public abstract Task<ActionResult> HandleCommand(TCommand command);
+        public Task<ActionResult> HandleCommand(TCommand command);
     }
-    public interface ICommandHandler<TCommand,TDbcontext,TResponse>
+    public interface ICommandHandler<TCommand,TResponse>
     {
-        public abstract Task<ActionResult<TResponse>> HandleCommand(TCommand command);
+        public Task<ActionResult<TResponse>> HandleCommand(TCommand command);
     }
 
     public abstract class CommandHandler<TDbcontext>
     {
-        public TDbcontext Dbcontext;
+        public TDbcontext Dbcontext { get; set; }
     }
 
 }

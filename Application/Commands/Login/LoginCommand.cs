@@ -10,7 +10,7 @@ namespace TasksLibrary.Application.Commands.Login
 {
     public class LoginCommand : Command<LoginDTO>
     {
-        public override ActionResult Validator()
+        public override ActionResult Validate()
         {
             return new RequestValidator()
                 .IsText(Password,"Invalid password")

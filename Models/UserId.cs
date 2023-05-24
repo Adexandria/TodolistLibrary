@@ -2,6 +2,10 @@
 {
     public class UserId
     {
+        protected UserId()
+        {
+
+        }
         public UserId(Guid id)
         {
             Id = id;

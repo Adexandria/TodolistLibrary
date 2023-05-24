@@ -7,9 +7,9 @@ namespace TasksLibrary.Services
     public class Repository<T>
     {
         public ISession Session;
-        public Repository(SessionFactory session)
+        public Repository(ISession session)
         {
-            Session = session.GetSession();
+            Session = session;
         }
 
         public async Task Add(T entity)

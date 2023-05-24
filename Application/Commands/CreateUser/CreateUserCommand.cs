@@ -5,7 +5,7 @@ namespace TasksLibrary.Application.Commands.CreateUser
 {
     public class CreateUserCommand : Command<CreateUserDTO>
     {
-        public override ActionResult Validator()
+        public override ActionResult Validate()
         {
             return new RequestValidator().IsEmail(Email, "Invalid email")
                 .IsText(Name, "Invalid name")

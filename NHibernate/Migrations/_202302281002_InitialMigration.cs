@@ -16,29 +16,29 @@ namespace TasksLibrary.NHibernate.Migrations
                 .WithColumn("Id").AsGuid().PrimaryKey().NotNullable().WithDefault(SystemMethods.NewGuid)
                 .WithColumn("Email").AsString(255).NotNullable()
                 .WithColumn("Name").AsString(255).NotNullable()
-                .WithColumn("AccessTokenId").AsGuid().Nullable()
+                .WithColumn("AccessToken_id").AsGuid().Nullable()
                 .WithColumn("PasswordHash").AsString(255).NotNullable()
                 .WithColumn("Salt").AsString(255).NotNullable()
-                .WithColumn("RefreshTokenId").AsGuid().Nullable();
+                .WithColumn("RefreshToken_id").AsGuid().Nullable();
 
             Create.Table("AccessTokens")
                 .WithColumn("Id").AsGuid().PrimaryKey().NotNullable().WithDefault(SystemMethods.NewGuid)
                 .WithColumn("Token").AsString(255).NotNullable()
                 .WithColumn("ExpirationDate").AsDateTime().NotNullable()
-                .WithColumn("UserId").AsGuid().Nullable();
+                .WithColumn("User_id").AsGuid().Nullable();
 
             Create.Table("RefreshTokens")
                 .WithColumn("Id").AsGuid().PrimaryKey().NotNullable().WithDefault(SystemMethods.NewGuid)
                 .WithColumn("Token").AsString(255).NotNullable()
                 .WithColumn("ExpirationDate").AsDateTime().NotNullable()
-                .WithColumn("UserId").AsGuid().Nullable();
+                .WithColumn("User_id").AsGuid().Nullable();
 
             Create.ForeignKey("FK_User_AccessToken")
-                .FromTable("Users").ForeignColumn("AccessTokenId")
+                .FromTable("Users").ForeignColumn("AccessToken_id")
                 .ToTable("AccessTokens").PrimaryColumn("Id");
             
             Create.ForeignKey("FK_User_RefreshToken")
-                .FromTable("Users").ForeignColumn("RefreshTokenId")
+                .FromTable("Users").ForeignColumn("RefreshToken_id")
                   .ToTable("RefreshTokens").PrimaryColumn("Id");
         }
     }

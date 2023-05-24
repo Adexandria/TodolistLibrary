@@ -6,21 +6,18 @@ using System.Threading.Tasks;
 
 namespace TasksLibrary.Extensions
 {
-    public class Command
+    public abstract class Command
     {
-        public ActionResult ActionResult;
-        
-        public virtual ActionResult Validator()
-        {
-            return new ActionResult();
-        }
-        
-        
+        public abstract ActionResult Validate();
     }
 
-    public class Command<T> : Command  
+    public abstract class Command<T> : Command, ICommand<T>
     {
-        
+
     }
-    
+
+    public interface ICommand<T> : IRequestValidator 
+    {
+    }
+
 }

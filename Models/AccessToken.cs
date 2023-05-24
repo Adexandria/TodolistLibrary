@@ -2,6 +2,10 @@
 {
     public class AccessToken : BaseClass
     {
+        public AccessToken()
+        {
+
+        }
         public AccessToken(string token,UserId userId)
         {
             Token = token;

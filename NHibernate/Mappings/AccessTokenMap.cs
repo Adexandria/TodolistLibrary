@@ -16,7 +16,7 @@ namespace TasksLibrary.NHibernate.Mappings
             Map(s => s.Token);
             Component(m => m.UserId, p =>
             {
-                p.Map(s => s.Id);
+                p.Map(s => s.Id,"User_id");
             });
         }
     }

@@ -9,6 +9,10 @@ namespace TasksLibrary.Models
 {
     public class User : BaseClass
     {
+        protected User()
+        {
+
+        }
         public User(string name,string email)
         {
             Name = name;
@@ -22,13 +26,13 @@ namespace TasksLibrary.Models
         public virtual string Salt { get; set; }
         
         
-        public string HashPassword(string password, out string salt)
+        public virtual string HashPassword(string password, out string salt)
         {
             salt = BCrypt.Net.BCrypt.GenerateSalt();
             var hash = BCrypt.Net.BCrypt.HashPassword(password, salt);
             return hash;
         }
-        public bool VerifyPassword(string password, string salt)
+        public virtual bool VerifyPassword(string password, string salt)
         {
             var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password,salt);
             return BCrypt.Net.BCrypt.Verify(password, hashedPassword);

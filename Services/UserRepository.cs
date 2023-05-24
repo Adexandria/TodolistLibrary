@@ -1,4 +1,5 @@
-﻿using NHibernate.Linq;
+﻿using NHibernate;
+using NHibernate.Linq;
 using TasksLibrary.Models;
 using TasksLibrary.Models.Interfaces;
 using TasksLibrary.NHibernate;
@@ -7,7 +8,7 @@ namespace TasksLibrary.Services
 {
     public class UserRepository : Repository<User>, IUserRepository
     {
-        public UserRepository(SessionFactory session) : base(session)
+        public UserRepository(ISession session) : base(session)
         {
         }
 
