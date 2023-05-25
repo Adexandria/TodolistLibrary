@@ -32,11 +32,6 @@ namespace TasksLibrary.Services
             return user;
         }
 
-        public async Task<User> GetExistingUserById(Guid userId)
-        {
-            var user = await Session.GetAsync<User>(userId);
-            return user;
-        }
         public async Task<bool> IsExist(string email)
         {
             var user = await Session.Query<User>().FirstOrDefaultAsync(s => s.Email == email);

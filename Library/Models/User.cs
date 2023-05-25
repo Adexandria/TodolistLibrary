@@ -24,6 +24,7 @@ namespace TasksLibrary.Models
         public virtual AccessToken AccessToken { get; set; }
         public virtual string PasswordHash { get; set; }
         public virtual string Salt { get; set; }
+        public virtual IList<Note> Notes { get; set; } = new List<Note>();
         
         
         public virtual string HashPassword(string password, out string salt)

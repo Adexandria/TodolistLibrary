@@ -31,5 +31,10 @@ namespace TasksLibrary.Services
         {
             return await Session.Query<T>().ToListAsync();
         }
+        public async Task<T> GetExistingEntityById(Guid id)
+        {
+            var entity = await Session.GetAsync<T>(id);
+            return entity;
+        }
     }
 }

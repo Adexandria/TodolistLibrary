@@ -7,8 +7,7 @@ using TasksLibrary.Services;
 
 namespace TasksLibrary.Models.Interfaces
 {
-    public interface IRefreshTokenRepository : IRepository<RefreshToken>
+    public interface INoteRepository : IRepository<Note>
     {
-        Task<UserId> GetUserByRefreshToken(string refreshToken);
     }
 }

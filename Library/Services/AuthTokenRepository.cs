@@ -46,7 +46,7 @@ namespace TasksLibrary.Services
         public string VerifyToken(string token)
         {
             TokenValidationParameters tokenValidationParameters = GetTokenValidationParameters();
-            JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+            JwtSecurityTokenHandler jwtSecurityTokenHandler = new();
             try
             {
                 var claims = jwtSecurityTokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken validatedToken);
@@ -55,7 +55,7 @@ namespace TasksLibrary.Services
             }
             catch(Exception ex)
             {
-                throw new ArgumentNullException("Null reference");
+                return default;
             }
             
             
