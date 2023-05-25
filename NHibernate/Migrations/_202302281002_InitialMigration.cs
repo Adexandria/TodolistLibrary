@@ -24,13 +24,13 @@ namespace TasksLibrary.NHibernate.Migrations
             Create.Table("AccessTokens")
                 .WithColumn("Id").AsGuid().PrimaryKey().NotNullable().WithDefault(SystemMethods.NewGuid)
                 .WithColumn("Token").AsString(255).NotNullable()
-                .WithColumn("ExpirationDate").AsDateTime().NotNullable()
                 .WithColumn("User_id").AsGuid().Nullable();
 
             Create.Table("RefreshTokens")
                 .WithColumn("Id").AsGuid().PrimaryKey().NotNullable().WithDefault(SystemMethods.NewGuid)
                 .WithColumn("Token").AsString(255).NotNullable()
-                .WithColumn("ExpirationDate").AsDateTime().NotNullable()
+                .WithColumn("Expires").AsDateTime().NotNullable()
+                .WithColumn("IsRevoked").AsDateTime().NotNullable()
                 .WithColumn("User_id").AsGuid().Nullable();
 
             Create.ForeignKey("FK_User_AccessToken")

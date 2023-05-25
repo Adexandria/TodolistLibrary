@@ -21,7 +21,7 @@ namespace TasksLibrary.Services
             {
                 Claims = new Dictionary<string, object>()
                 {
-                    { "Id", user.Id.ToString("N") }
+                    { "id", user.Id.ToString("N") }
                 },
                 Expires = DateTime.UtcNow.AddMinutes(5),
                 SigningCredentials = new SigningCredentials(GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256Signature)
@@ -63,7 +63,7 @@ namespace TasksLibrary.Services
         
         private SecurityKey GetSymmetricSecurityKey()
         {
-            byte[] symmetricKey = Convert.FromBase64String("superSecretKey@345");
+            byte[] symmetricKey = Encoding.UTF8.GetBytes("SecretKeyTaskApplication@1345");
             return new SymmetricSecurityKey(symmetricKey);
         }
 

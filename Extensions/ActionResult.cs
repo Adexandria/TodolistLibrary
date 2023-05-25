@@ -1,38 +1,10 @@
 ﻿namespace TasksLibrary.Extensions
 {
-    public class ActionResult<T> : ActionResult
+
+
+    public class ActionResult<T> : ActionResult 
     {
         public T Data { get; set; }
-
-        
-        public static ActionResult<T> SuccessfulOperation( T data,string accessToken)
-        {
-            return new ActionResult<T>()
-            {
-                Data = data,
-                AccessToken = accessToken,
-                StatusCode = 200,
-                IsSuccessful = true,
-                NotSuccessful = false,
-                Errors = new List<string>()
-                 
-            };
-        }
-        public static ActionResult<T> SuccessfulOperation(T data, string accessToken,string refreshToken)
-        {
-            return new ActionResult<T>()
-            {
-                Data = data,
-                AccessToken = accessToken,
-                RefreshToken = refreshToken,
-                StatusCode = 200,
-                IsSuccessful = true,
-                NotSuccessful = false,
-                Errors = new List<string>()
-
-            };
-        }
-
         public static ActionResult<T> SuccessfulOperation(T data)
         {
             return new ActionResult<T>()
@@ -97,19 +69,42 @@
 
         }
 
-        public  ActionResult<T> AddError(string error)
+        public ActionResult<T> AddError(string error)
         {
             Errors.Add(error);
             return this;
         }
 
-        public  ActionResult<T> AddErrors(List<string> errors)
+        public ActionResult<T> AddErrors(List<string> errors)
         {
             if (errors == null)
                 return this;
             Errors.AddRange(errors);
             return this;
         }
+    }
+
+    public class ActionTokenResult<T> : ActionResult<T>
+    {
+        public T Data { get; set; }
+        public string AccessToken { get; set; }
+        public string RefreshToken { get; set; }
+
+        public static ActionTokenResult<T> SuccessfulOperation(T data, string accessToken,string refreshToken)
+        {
+            return new ActionTokenResult<T>()
+            {
+                Data = data,
+                AccessToken = accessToken,
+                RefreshToken = refreshToken,
+                StatusCode = 200,
+                IsSuccessful = true,
+                NotSuccessful = false,
+                Errors = new List<string>()
+
+            };
+        }
+       
     }
 
     
@@ -119,8 +114,6 @@
         {
 
         }
-        public string AccessToken { get; set; }
-        public string RefreshToken { get; set; }
         public int StatusCode { get; set; }
         public List<string> Errors { get; set; }
         public bool IsSuccessful { get; set; } = false;

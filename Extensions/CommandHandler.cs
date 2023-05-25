@@ -23,6 +23,11 @@ namespace TasksLibrary.Extensions
         {
             return ActionResult<TResponse>.SuccessfulOperation(response);
         }
+
+        protected ActionResult<TResponse> SuccessfulOperation(TResponse response,string accessToken, string refreshToken)
+        {
+            return ActionTokenResult<TResponse>.SuccessfulOperation(response,accessToken,refreshToken);
+        }
     }
 
     public abstract class CommandHandler<TCommand,TDbcontext> : CommandHandler<TDbcontext> , ICommandHandler<TCommand>
