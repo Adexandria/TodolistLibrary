@@ -15,5 +15,7 @@ namespace TasksLibrary.Services
         public AccessTokenRepository(ISession session) : base(session)
         {
         }
+
+       
     }
 }

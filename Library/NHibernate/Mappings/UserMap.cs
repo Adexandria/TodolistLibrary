@@ -1,10 +1,4 @@
-﻿using FluentNHibernate.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TasksLibrary.Models;
+﻿using TasksLibrary.Models;
 
 namespace TasksLibrary.NHibernate.Mappings
 {
@@ -19,6 +13,7 @@ namespace TasksLibrary.NHibernate.Mappings
             Map(s => s.Salt);
             References(s => s.AccessToken).Cascade.All();
             References(s => s.RefreshToken).Cascade.All();
+            HasMany(s=>s.Notes).Cascade.Delete();
         }
     }
 }

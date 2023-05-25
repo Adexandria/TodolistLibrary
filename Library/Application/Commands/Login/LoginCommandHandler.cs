@@ -6,7 +6,7 @@ using TasksLibrary.Services.Architecture.Database;
 
 namespace TasksLibrary.Application.Commands.Login
 {
-    public class LoginCommandHandler: CommandHandler<LoginCommand,DbContext<AccessRepository>,LoginDTO>
+    public class LoginCommandHandler: CommandHandler<LoginCommand,DbContext<AccessManagement>,LoginDTO>
     {
         public override async Task<ActionResult<LoginDTO>> HandleCommand(LoginCommand command)
         {

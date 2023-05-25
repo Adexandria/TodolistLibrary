@@ -3,7 +3,6 @@ using FluentMigrator.Runner;
 using Microsoft.Extensions.DependencyInjection;
 using NHibernate;
 using TasksLibrary.Application.Commands.CreateUser;
-using TasksLibrary.Application.Commands.Login;
 using TasksLibrary.Extensions;
 using TasksLibrary.Models;
 using TasksLibrary.Models.Interfaces;
@@ -56,14 +55,27 @@ namespace TasksLibrary.Services.Architecture.Application
                 .PropertiesAutowired()
                 .SingleInstance();
 
-            builder.RegisterType<AccessRepository>()
+            builder.RegisterType<QueryContext<Note>>()
+                .PropertiesAutowired()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<AccessManagement>()
+                .PropertiesAutowired()
+               .InstancePerLifetimeScope();
+
+            builder.RegisterType<TaskManagement>()
                 .PropertiesAutowired()
                .InstancePerLifetimeScope();
 
             builder.RegisterType<AccountManagementContext>()
-                .As<DbContext<AccessRepository>>()
+                .As<DbContext<AccessManagement>>()
                 .PropertiesAutowired()
                 .InstancePerLifetimeScope();
+
+            builder.RegisterType<TaskManagementContext>()
+              .As<DbContext<TaskManagement>>()
+              .PropertiesAutowired()
+              .InstancePerLifetimeScope();
 
             builder.Register((o) =>
             {

@@ -3,9 +3,9 @@ using TasksLibrary.Models.Interfaces;
 
 namespace TasksLibrary.Services.Architecture.TaskModule
 {
-    public class AccountManagementContext : DatabaseManagementContext<AccessRepository>
+    public class AccountManagementContext : DatabaseManagementContext<AccessManagement>
     {
-        public AccountManagementContext(AccessRepository context,ISession session,
+        public AccountManagementContext(AccessManagement context,ISession session,
             IUserRepository userRepository,
             IAuthToken authTokenRepository,
             IRefreshTokenRepository refreshTokenRepository,
@@ -14,7 +14,7 @@ namespace TasksLibrary.Services.Architecture.TaskModule
             Context = context;
             Context.UserRepository = userRepository;
             Context.AuthenTokenRepository = authTokenRepository;
-            context.RefreshTokenRepository = refreshTokenRepository;
+            Context.RefreshTokenRepository = refreshTokenRepository;
             Context.AccessTokenRepository = accessTokenRepository;
         }
        

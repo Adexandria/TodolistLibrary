@@ -6,7 +6,7 @@ using TasksLibrary.Services.Architecture.Database;
 
 namespace TasksLibrary.Application.Commands.CreateUser
 {
-    public class CreateUserCommandHandler : CommandHandler<CreateUserCommand, DbContext<AccessRepository>, CreateUserDTO>
+    public class CreateUserCommandHandler : CommandHandler<CreateUserCommand, DbContext<AccessManagement>, CreateUserDTO>
     {
         public override async Task<ActionResult<CreateUserDTO>> HandleCommand(CreateUserCommand command)
         {
