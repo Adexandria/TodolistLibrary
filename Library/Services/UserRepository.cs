@@ -17,7 +17,7 @@ namespace TasksLibrary.Services
             var user = await Session.Query<User>().FirstOrDefaultAsync(x => x.Email == email);
             if (user != null)
             {
-                var isVerified = user.VerifyPassword(password, user.Salt);
+                var isVerified = user.VerifyPassword(password, user.PasswordHash,user.Salt);
                 if (isVerified)
                 {
                     return user;
@@ -35,11 +35,7 @@ namespace TasksLibrary.Services
         public async Task<bool> IsExist(string email)
         {
             var user = await Session.Query<User>().FirstOrDefaultAsync(s => s.Email == email);
-            if(user != null)
-            {
-                return true;
-            }
-            return false;
+            return user != null;
         }
     }
 }

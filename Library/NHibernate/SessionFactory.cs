@@ -10,7 +10,7 @@ namespace TasksLibrary.NHibernate
     {
         public SessionFactory(string _connectionString)
         {
-            if (_sessionFactory is null);
+            if (_sessionFactory is null)
                 _sessionFactory = BuildSessionFactory(_connectionString);
         }
 

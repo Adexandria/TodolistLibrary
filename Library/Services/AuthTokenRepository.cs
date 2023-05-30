@@ -46,6 +46,7 @@ namespace TasksLibrary.Services
         public string VerifyToken(string token)
         {
             TokenValidationParameters tokenValidationParameters = GetTokenValidationParameters();
+
             JwtSecurityTokenHandler jwtSecurityTokenHandler = new();
             try
             {
@@ -55,10 +56,9 @@ namespace TasksLibrary.Services
             }
             catch(Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return default;
             }
-            
-            
         }
         
         private SecurityKey GetSymmetricSecurityKey()
