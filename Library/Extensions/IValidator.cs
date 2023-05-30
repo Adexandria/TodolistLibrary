@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TasksLibrary.Extensions
 {
-    public interface IRequestValidator
+    public interface IValidator
     {
         ActionResult Validate();
     }

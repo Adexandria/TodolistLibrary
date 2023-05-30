@@ -33,10 +33,10 @@ namespace TasksLibrary.Models
             var hash = BCrypt.Net.BCrypt.HashPassword(password, salt);
             return hash;
         }
-        public virtual bool VerifyPassword(string password, string salt)
+        public virtual bool VerifyPassword(string password, string currentPassword,string salt)
         {
             var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password,salt);
-            return BCrypt.Net.BCrypt.Verify(password, hashedPassword);
+            return currentPassword.Equals(hashedPassword);
         }
     }
 }

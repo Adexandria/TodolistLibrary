@@ -16,7 +16,7 @@ namespace TasksLibrary.Extensions
 
     }
 
-    public interface ICommand<T> : IRequestValidator 
+    public interface ICommand<T> : IValidator 
     {
     }
 
