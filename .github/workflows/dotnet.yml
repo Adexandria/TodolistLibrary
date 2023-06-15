@@ -1,6 +1,5 @@
 # This workflow will build a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-
 name: .NET
 
 on:
@@ -24,3 +23,9 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
+    - name: add dotnet nuget 
+    - run: dotnet nuget add source --username paprika --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/Adexandria/index.json"
+    - name: Pack library
+    - run: dotnet pack --configuration Release
+    - name: publish nuget
+      run:  dotnet nuget push "bin/Release/TasksLibrary.1.0.0.nupkg"  --api-key ${{ secrets.GITHUB_PAT }} --source "github"
