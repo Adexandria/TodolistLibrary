@@ -23,10 +23,12 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - name: add dotnet nuget 
-    - uses: actions/setup-dotnet
-    - run: dotnet nuget add source --username paprika --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/Adexandria/index.json"
+    - uses: actions/setup-dotnet@v3
+      with:
+          dotnet-version: 6.0.x
+    - name: add nuget package
+      run: dotnet nuget add source --username paprika --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/Adexandria/index.json"
     - name: Pack library
-    - run: dotnet pack --configuration Release
+      run: dotnet pack --configuration Release
     - name: publish nuget
-      run:  dotnet nuget push "bin/Release/TasksLibrary.1.0.0.nupkg"  --api-key ${{ secrets.GITHUB_PAT }} --source "github"
+      run:  dotnet nuget push "/home/runner/work/TodolistLibrary/TodolistLibrary/TasksLibrary.Client/bin/Release/TasksLibrary.Client.1.0.0.nupkg"  --api-key ${{ secrets.PAT }} --source "github"
