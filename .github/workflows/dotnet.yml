@@ -31,4 +31,4 @@ jobs:
     - name: Pack library
       run: dotnet pack --configuration Release
     - name: publish nuget
-      run:  dotnet nuget push "bin/Release/TasksLibrary.1.0.0.nupkg"  --api-key ${{ secrets.GITHUB_PAT }} --source "github"
+      run:  dotnet nuget push "/home/runner/work/TodolistLibrary/TodolistLibrary/TasksLibrary.Client/bin/Release/TasksLibrary.Client.1.0.0.nupkg"  --api-key ${{ secrets.GITHUB_PAT }} --source "github"
