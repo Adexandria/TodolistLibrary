@@ -24,6 +24,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: add dotnet nuget 
+    - uses: actions/setup-dotnet
     - run: dotnet nuget add source --username paprika --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/Adexandria/index.json"
     - name: Pack library
     - run: dotnet pack --configuration Release
