@@ -1,7 +1,7 @@
 # Todo-List Library
 Todo-List Library is a simple library that allows authorised users to take down notes.
 
-## Installing Adeola.TodoListlIbrary
+## Installing Adeola.TodoListLIbrary
 
 ### Introduction
 This following are needed before proceeding with that installation:
