@@ -13,7 +13,7 @@ env:
    project_path: 'Library/TasksLibrary.csproj' 
    output_path:  'bin/Release/net5.0/publish/'
    package_id: 'Adeola.TodoListLibrary'
-   major_version: 2
+   major_version: 1
    minor_version: 0
    patch_version: 0
    build_number: ${{ github.run_number }}
@@ -43,4 +43,4 @@ jobs:
     - name: Pack library
       run: dotnet pack ${{env.project_path}} --configuration Release --output ${{env.output_path}} --no-restore -p:PackageId=${{ env.package_id }} -p:PackageVersion=${{ env.major_version }}.${{ env.minor_version }}.${{ env.build_number }} --property:Authors="${{ env.authors }}" --property:Company="${{ env.company_name }}"
     - name: publish nuget
-      run:  dotnet nuget push "**\*.nupkg"  --api-key ${{ secrets.PAT }} --source "https://nuget.pkg.github.com/Adexandria/index.json" --skipDuplicate --verbosity detailed
+      run:  dotnet nuget push "**\*.nupkg"  --api-key ${{ secrets.PAT }} --source "https://nuget.pkg.github.com/Adexandria/index.json" 
