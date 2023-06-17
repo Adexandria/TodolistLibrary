@@ -3,10 +3,22 @@
 name: .NET
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+ pull_request_target:
+   types:
+   - closed
+   branches:
+    - main
+
+env:
+   project_path: 'Library/TasksLibrary.csproj' 
+   output_path:  'bin/Release/net5.0/publish/'
+   package_id: 'Adeola.TodoListLibrary'
+   major_version: 2
+   minor_version: 0
+   patch_version: 0
+   build_number: ${{ github.run_number }}
+   company_name: 'Paprika'
+   authors: 'Adeola Aderibigbe'
 
 jobs:
   build:
@@ -29,6 +41,6 @@ jobs:
     - name: add nuget package
       run: dotnet nuget add source --username paprika --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/Adexandria/index.json"
     - name: Pack library
-      run: dotnet pack --configuration Release
+      run: dotnet pack ${{env.project_path}} --configuration Release --output ${{env.output_path}} --no-restore -p:PackageId=${{ env.package_id }} -p:PackageVersion=${{ env.major_version }}.${{ env.minor_version }}.${{ env.build_number }} --property:Authors="${{ env.authors }}" --property:Company="${{ env.company_name }}"
     - name: publish nuget
-      run:  dotnet nuget push "/home/runner/work/TodolistLibrary/TodolistLibrary/TasksLibrary.Client/bin/Release/TasksLibrary.Client.1.0.0.nupkg"  --api-key ${{ secrets.PAT }} --source "github"
+      run:  dotnet nuget push "**\*.nupkg"  --api-key ${{ secrets.PAT }} --source "https://nuget.pkg.github.com/Adexandria/index.json" -SkipDuplicate -Verbosity detailed
