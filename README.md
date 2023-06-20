@@ -6,7 +6,7 @@ Todo-List Library is a simple library that allows authorised users to take down 
 ### Introduction
 This following are needed before proceeding with that installation:
  - Visual Studio installed on your machine.
- - A .NET 6.0 Standard project that you want to add the package to.
+ - A .NET 6.0 project that you want to add the package to.
 
 ### Installation
 To install the package using the dotnet add package command, follow the steps below:
