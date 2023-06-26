@@ -17,7 +17,7 @@ namespace TasksLibrary.Services
             var user = await Session.Query<User>().FirstOrDefaultAsync(x => x.Email == email);
             if (user != null)
             {
-                var isVerified = user.VerifyPassword(password, user.PasswordHash,user.Salt);
+                var isVerified = PasswordManager.VerifyPassword(password, user.PasswordHash,user.Salt);
                 if (isVerified)
                 {
                     return user;
@@ -37,5 +37,7 @@ namespace TasksLibrary.Services
             var user = await Session.Query<User>().FirstOrDefaultAsync(s => s.Email == email);
             return user != null;
         }
+
+        public IPasswordManager PasswordManager { get; set; }
     }
 }
