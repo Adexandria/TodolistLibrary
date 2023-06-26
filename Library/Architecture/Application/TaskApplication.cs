@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using TasksLibrary.Extensions;
+using TasksLibrary.Utilities;
 
 namespace TasksLibrary.Architecture.Application
 {

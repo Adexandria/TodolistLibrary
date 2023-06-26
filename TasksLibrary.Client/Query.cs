@@ -3,7 +3,7 @@ using TasksLibrary.Application.Commands.VerifyToken;
 using TasksLibrary.Application.Queries.FetchAllNotes;
 using TasksLibrary.Application.Queries.FetchNoteById;
 using TasksLibrary.Architecture.Application;
-using TasksLibrary.Extensions;
+using TasksLibrary.Utilities;
 
 namespace TasksLibrary.Client
 {

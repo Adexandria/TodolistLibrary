@@ -1,6 +1,6 @@
 ﻿using NHibernate.Linq;
 using TasksLibrary.Application.Queries.FetchAllNotes;
-using TasksLibrary.Extensions;
+using TasksLibrary.Utilities;
 using TasksLibrary.Models;
 using TasksLibrary.Architecture.Database;
 

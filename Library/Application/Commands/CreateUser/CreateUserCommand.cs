@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TasksLibrary.Extensions;
+using TasksLibrary.Utilities;
 
 namespace TasksLibrary.Application.Commands.CreateUser
 {
