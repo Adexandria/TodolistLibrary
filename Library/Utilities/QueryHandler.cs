@@ -2,7 +2,7 @@
 
 using System.Net;
 
-namespace TasksLibrary.Extensions
+namespace TasksLibrary.Utilities
 {
     public abstract class QueryHandler<TQuery, TQueryContext, TResponse> : QueryHandler<TQueryContext>, IQueryHandler<TQuery, TResponse>
     {

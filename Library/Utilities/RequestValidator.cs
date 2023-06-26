@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace TasksLibrary.Extensions
+namespace TasksLibrary.Utilities
 {
 
     public class RequestValidator

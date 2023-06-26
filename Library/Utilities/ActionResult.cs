@@ -1,7 +1,5 @@
-﻿namespace TasksLibrary.Extensions
+﻿namespace TasksLibrary.Utilities
 {
-
-
     public class ActionResult<T> : ActionResult 
     {
         public T Data { get; set; }

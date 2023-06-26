@@ -1,7 +1,7 @@
 ﻿
 
 using TasksLibrary.Application.Queries.FetchAllNotes;
-using TasksLibrary.Extensions;
+using TasksLibrary.Utilities;
 
 namespace TasksLibrary.Application.Queries.FetchNoteById
 {

@@ -1,7 +1,6 @@
 ﻿using NHibernate;
 using TasksLibrary.Architecture.Database;
-using TasksLibrary.Extensions;
-
+using TasksLibrary.Utilities;
 
 namespace TasksLibrary.Architecture.TaskModule
 {

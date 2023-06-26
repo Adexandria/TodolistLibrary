@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using TasksLibrary.Architecture.Database;
 
-namespace TasksLibrary.Extensions
+namespace TasksLibrary.Utilities
 {
 
     public abstract class CommandHandler<TCommand, TDbcontext, TResponse> : CommandHandler<TDbcontext>, ICommandHandler<TCommand,TResponse>

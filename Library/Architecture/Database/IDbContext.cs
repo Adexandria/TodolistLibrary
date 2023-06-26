@@ -1,5 +1,4 @@
-﻿using TasksLibrary.Extensions;
-
+﻿using TasksLibrary.Utilities;
 namespace TasksLibrary.Architecture.Database
 {
     public interface IDbContext

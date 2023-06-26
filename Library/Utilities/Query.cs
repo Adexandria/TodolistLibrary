@@ -1,6 +1,6 @@
 ﻿
 
-namespace TasksLibrary.Extensions
+namespace TasksLibrary.Utilities
 {
     public abstract class Query<TResponse> : IQuery<TResponse>
     {
