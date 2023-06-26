@@ -37,4 +37,4 @@ jobs:
     - name: Pack library
       run: dotnet pack ${{env.project_path}} --configuration Release --output ${{env.output_path}} --no-restore -p:PackageId=${{ env.package_id }} -p:PackageVersion=${{ env.major_version }}.${{ env.minor_version }}.${{ env.build_number }} --property:Authors="${{ env.authors }}" --property:Company="${{ env.company_name }}"
     - name: Publish nuget
-      run:  dotnet nuget push "/home/runner/work/TodolistLibrary/TodolistLibrary/bin/Release/net5.0/publish/*.nupkg"  --api-key ${{ secrets.PAT }} --source "https://nuget.pkg.github.com/Adexandria/index.json" 
+      run:  dotnet nuget push "/home/runner/work/TodolistLibrary/TodolistLibrary/bin/Release/net6.0/publish/*.nupkg"  --api-key ${{ secrets.PAT }} --source "https://nuget.pkg.github.com/Adexandria/index.json" 
