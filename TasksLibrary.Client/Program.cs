@@ -2,7 +2,7 @@
 using TasksLibrary.Application.Commands.Login;
 using TasksLibrary.Application.Commands.UpdateTask;
 using TasksLibrary.Client;
-using TasksLibrary.Services.Architecture.Application;
+using TasksLibrary.Architecture.Application;
 
 var containerBuilder = new TaskContainerBuilder("Data Source=(localdb)\\MSSQLLocalDB;Database=TodoList;Integrated Security=True;Connect Timeout=30;");
 

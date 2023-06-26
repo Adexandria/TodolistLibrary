@@ -6,7 +6,7 @@ using TasksLibrary.Application.Commands.GenerateToken;
 using TasksLibrary.Application.Commands.Login;
 using TasksLibrary.Application.Commands.UpdateTask;
 using TasksLibrary.Application.Commands.VerifyToken;
-using TasksLibrary.Services.Architecture.Application;
+using TasksLibrary.Architecture.Application;
 
 namespace TasksLibrary.Client
 {
