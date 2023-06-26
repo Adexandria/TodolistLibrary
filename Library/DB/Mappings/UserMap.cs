@@ -1,6 +1,6 @@
 ﻿using TasksLibrary.Models;
 
-namespace TasksLibrary.NHibernate.Mappings
+namespace TasksLibrary.DB.Mappings
 {
     public class UserMap : ClassMapping<User>
     {

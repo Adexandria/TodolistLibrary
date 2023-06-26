@@ -2,9 +2,9 @@
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using NHibernate.Tool.hbm2ddl;
-using TasksLibrary.NHibernate.Mappings;
+using TasksLibrary.DB.Mappings;
 
-namespace TasksLibrary.NHibernate
+namespace TasksLibrary.DB
 {
     public class SessionFactory
     {

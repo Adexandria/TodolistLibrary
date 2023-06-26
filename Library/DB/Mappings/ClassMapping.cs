@@ -1,7 +1,7 @@
 ﻿using FluentNHibernate.Mapping;
 using TasksLibrary.Models;
 
-namespace TasksLibrary.NHibernate.Mappings
+namespace TasksLibrary.DB.Mappings
 {
     public class ClassMapping<T> : ClassMap<T> where T : BaseClass
     {

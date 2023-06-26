@@ -11,7 +11,7 @@ on:
 
 env:
    project_path: 'Library/TasksLibrary.csproj' 
-   output_path:  'bin/Release/net5.0/publish/'
+   output_path:  'bin/Release/net6.0/publish/'
    package_id: 'Adeola.TodoListLibrary'
    major_version: 1
    minor_version: 0
@@ -27,22 +27,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: 6.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build and publish
-      run: |
-       dotnet build --no-restore
-       dotnet publish ${{env.project_path}} --configuration Release --output ${{env.output_path}}
     - uses: actions/setup-dotnet@v3
       with:
           dotnet-version: 6.0.x
-    - name: add nuget package
+    - name: Publish project
+      run:  dotnet publish ${{env.project_path}} --configuration Release --output ${{env.output_path}}
+    - name: Add nuget package
       run: dotnet nuget add source --username paprika --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/Adexandria/index.json"
     - name: Pack library
       run: dotnet pack ${{env.project_path}} --configuration Release --output ${{env.output_path}} --no-restore -p:PackageId=${{ env.package_id }} -p:PackageVersion=${{ env.major_version }}.${{ env.minor_version }}.${{ env.build_number }} --property:Authors="${{ env.authors }}" --property:Company="${{ env.company_name }}"
-    - name: publish nuget
+    - name: Publish nuget
       run:  dotnet nuget push "/home/runner/work/TodolistLibrary/TodolistLibrary/bin/Release/net5.0/publish/*.nupkg"  --api-key ${{ secrets.PAT }} --source "https://nuget.pkg.github.com/Adexandria/index.json" 

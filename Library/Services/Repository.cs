@@ -1,6 +1,5 @@
 ﻿using NHibernate;
 using NHibernate.Linq;
-using TasksLibrary.NHibernate;
 
 namespace TasksLibrary.Services
 {

@@ -1,11 +1,7 @@
 ﻿using FluentMigrator;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace TasksLibrary.NHibernate.Migrations
+
+namespace TasksLibrary.DB.Migrations
 {
     [Migration(202305250924)]
     public class AddNote : ForwardOnlyMigration

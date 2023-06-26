@@ -2,7 +2,7 @@
 using NHibernate.Linq;
 using TasksLibrary.Models;
 using TasksLibrary.Models.Interfaces;
-using TasksLibrary.NHibernate;
+using TasksLibrary.DB;
 
 namespace TasksLibrary.Services
 {

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TasksLibrary.Models;
 
-namespace TasksLibrary.NHibernate.Mappings
+namespace TasksLibrary.DB.Mappings
 {
     public class RefreshTokenMap : ClassMapping<RefreshToken>
     {

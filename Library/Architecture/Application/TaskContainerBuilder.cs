@@ -7,7 +7,7 @@ using TasksLibrary.Architecture.Database;
 using TasksLibrary.Architecture.TaskModule;
 using TasksLibrary.Models;
 using TasksLibrary.Models.Interfaces;
-using TasksLibrary.NHibernate;
+using TasksLibrary.DB;
 using TasksLibrary.Services;
 
 namespace TasksLibrary.Architecture.Application
