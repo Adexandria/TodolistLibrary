@@ -27,16 +27,6 @@ namespace TasksLibrary.Models
         public virtual IList<Note> Notes { get; set; } = new List<Note>();
         
         
-        public virtual string HashPassword(string password, out string salt)
-        {
-            salt = BCrypt.Net.BCrypt.GenerateSalt();
-            var hash = BCrypt.Net.BCrypt.HashPassword(password, salt);
-            return hash;
-        }
-        public virtual bool VerifyPassword(string password, string currentPassword,string salt)
-        {
-            var hashedPassword = BCrypt.Net.BCrypt.HashPassword(password,salt);
-            return currentPassword.Equals(hashedPassword);
-        }
+       
     }
 }

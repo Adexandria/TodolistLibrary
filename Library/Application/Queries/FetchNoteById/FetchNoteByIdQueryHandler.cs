@@ -2,7 +2,7 @@
 using TasksLibrary.Application.Queries.FetchAllNotes;
 using TasksLibrary.Extensions;
 using TasksLibrary.Models;
-using TasksLibrary.Services.Architecture.Database;
+using TasksLibrary.Architecture.Database;
 
 namespace TasksLibrary.Application.Queries.FetchNoteById
 {

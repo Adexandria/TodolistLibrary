@@ -1,5 +1,5 @@
 ﻿using System.Net;
-using TasksLibrary.Services.Architecture.Database;
+using TasksLibrary.Architecture.Database;
 
 namespace TasksLibrary.Extensions
 {

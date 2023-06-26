@@ -1,6 +1,6 @@
 ﻿using TasksLibrary.Extensions;
 using TasksLibrary.Models.Interfaces;
-using TasksLibrary.Services.Architecture.Database;
+using TasksLibrary.Architecture.Database;
 
 namespace TasksLibrary.Application.Commands.VerifyToken
 {

@@ -1,7 +1,7 @@
-﻿using TasksLibrary.Extensions;
+﻿using TasksLibrary.Architecture.Database;
+using TasksLibrary.Extensions;
 using TasksLibrary.Models;
 using TasksLibrary.Models.Interfaces;
-using TasksLibrary.Services.Architecture.Database;
 
 namespace TasksLibrary.Application.Commands.CreateTask
 {

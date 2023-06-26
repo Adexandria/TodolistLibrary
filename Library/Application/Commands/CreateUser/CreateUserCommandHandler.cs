@@ -1,8 +1,9 @@
 ﻿using System.Net;
+using TasksLibrary.Architecture.Database;
 using TasksLibrary.Extensions;
 using TasksLibrary.Models;
 using TasksLibrary.Models.Interfaces;
-using TasksLibrary.Services.Architecture.Database;
+using TasksLibrary.Services;
 
 namespace TasksLibrary.Application.Commands.CreateUser
 {
@@ -17,7 +18,7 @@ namespace TasksLibrary.Application.Commands.CreateUser
             }
 
             var newUser = new User(command.Name, command.Email);
-            var hashedPassword = newUser.HashPassword(command.Password, out var salt);
+            var hashedPassword = PasswordManager.HashPassword(command.Password, out var salt);
             newUser.Salt = salt;
             newUser.PasswordHash = hashedPassword;
 
@@ -33,6 +34,7 @@ namespace TasksLibrary.Application.Commands.CreateUser
             };
             return SuccessfulOperation(createdUser);
         }
+        public IPasswordManager PasswordManager { get; set; }
     }
 }
 
