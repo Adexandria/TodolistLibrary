@@ -20,6 +20,6 @@ jobs:
     - name: Restore project
       run: dotnet restore 
     - name: Build project
-      run: dotnet build ${{project_file}} --no-restore
+      run: dotnet build ${{env.project_file}} --no-restore
 
 
