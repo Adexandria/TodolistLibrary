@@ -7,6 +7,7 @@ namespace TasksLibrary.DB.Mappings
     {
         public NoteMap()
         {
+            Cache.ReadWrite();
             Table("Notes");
             Map(s=>s.Task);
             Map(s=>s.Created);

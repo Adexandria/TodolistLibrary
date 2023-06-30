@@ -6,6 +6,7 @@ namespace TasksLibrary.DB.Mappings
     {
         public UserMap()
         {
+            Cache.ReadWrite();
             Table("Users");
             Map(s => s.Email);
             Map(s => s.Name);

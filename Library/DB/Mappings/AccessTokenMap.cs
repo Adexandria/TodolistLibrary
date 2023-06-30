@@ -1,10 +1,4 @@
-﻿using FluentNHibernate.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TasksLibrary.Models;
+﻿using TasksLibrary.Models;
 
 namespace TasksLibrary.DB.Mappings
 {
@@ -12,6 +6,7 @@ namespace TasksLibrary.DB.Mappings
     {
         public AccessTokenMap()
         {
+            Cache.ReadWrite();
             Table("AccessTokens");
             Map(s => s.Token);
             Component(m => m.UserId, p =>

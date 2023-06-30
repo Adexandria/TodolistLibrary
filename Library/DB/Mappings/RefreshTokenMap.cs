@@ -12,6 +12,7 @@ namespace TasksLibrary.DB.Mappings
     {
         public RefreshTokenMap()
         {
+            Cache.ReadWrite();
             Table("RefreshTokens");
             Map(s => s.Expires);
             Map(s => s.IsRevoked);
