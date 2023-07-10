@@ -11,5 +11,10 @@ namespace TasksLibrary.Tests
         {
             _dbMock.Setup(s => s.CommitAsync()).ReturnsAsync(ActionResult.Successful());
         }
+
+        public static void AssumeCommitFails(this Mock<DbContext<TaskManagement>> _dbMock)
+        {
+            _dbMock.Setup(s => s.CommitAsync()).ReturnsAsync(ActionResult.Failed());
+        }
     }
 }
