@@ -21,7 +21,7 @@ namespace TasksLibrary.Client
                 AccessToken = accessToken
             };
 
-            var response = await Application.ExceuteCommand<VerifyTokenCommand, string>(Container, accessCommand);
+            var response = await Application.ExecuteCommand<VerifyTokenCommand, string>(Container, accessCommand);
             if (response.NotSuccessful)
                 return response.Errors[0];
             var getAllTasksResponse = await Application.SendQuery<FetchAllNotesQuery, List<NoteDTO>>(Container, new FetchAllNotesQuery() { UserId = new Guid(response.Data)});
@@ -36,7 +36,7 @@ namespace TasksLibrary.Client
                 AccessToken = accessToken
             };
 
-            var response = await Application.ExceuteCommand<VerifyTokenCommand, string>(Container, accessCommand);
+            var response = await Application.ExecuteCommand<VerifyTokenCommand, string>(Container, accessCommand);
             if (response.NotSuccessful)
                 return response.Errors[0];
             var command = new FetchNoteByIdQuery()

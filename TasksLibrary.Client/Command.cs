@@ -19,7 +19,7 @@ namespace TasksLibrary.Client
         }
         public async Task<dynamic> CreateUser(CreateUserCommand command)
         {
-            var response = await Application.ExceuteCommand<CreateUserCommand, CreateUserDTO>(Container, command);
+            var response = await Application.ExecuteCommand<CreateUserCommand, CreateUserDTO>(Container, command);
             if (response.NotSuccessful)
                 return response.Errors[0];
             return response.Data;
@@ -27,7 +27,7 @@ namespace TasksLibrary.Client
 
         public  async Task<dynamic> LoginUser(LoginCommand command)
         {
-            var response = await Application.ExceuteCommand<LoginCommand, LoginDTO>(Container, command);
+            var response = await Application.ExecuteCommand<LoginCommand, LoginDTO>(Container, command);
             if (response.NotSuccessful)
                 return response.Errors[0];
             return response;
@@ -40,7 +40,7 @@ namespace TasksLibrary.Client
                 AccessToken = accessToken
             };
 
-            var response = await Application.ExceuteCommand<VerifyTokenCommand,string>(Container,accessCommand);
+            var response = await Application.ExecuteCommand<VerifyTokenCommand,string>(Container,accessCommand);
             if (response.NotSuccessful)
                 return response.Errors[0];
 
@@ -51,7 +51,7 @@ namespace TasksLibrary.Client
                 UserId = new Guid(response.Data)
             };
 
-            var createdResponse = await Application.ExceuteCommand<CreateTaskCommand,Guid>(Container,taskCommand);
+            var createdResponse = await Application.ExecuteCommand<CreateTaskCommand,Guid>(Container,taskCommand);
             if (createdResponse.NotSuccessful)
                 return createdResponse.Errors[0];
 
@@ -66,11 +66,11 @@ namespace TasksLibrary.Client
                 AccessToken = accessToken
             };
 
-            var response = await Application.ExceuteCommand<VerifyTokenCommand, string>(Container, accessCommand);
+            var response = await Application.ExecuteCommand<VerifyTokenCommand, string>(Container, accessCommand);
             if (response.NotSuccessful)
                 return response.Errors[0];
 
-            var updatedResponse = await Application.ExceuteCommand(Container,command);
+            var updatedResponse = await Application.ExecuteCommand(Container,command);
             if (updatedResponse.NotSuccessful)
                 return updatedResponse.Errors[0];
             return updatedResponse;
@@ -83,7 +83,7 @@ namespace TasksLibrary.Client
                 AccessToken = accessToken
             };
 
-            var response = await Application.ExceuteCommand<VerifyTokenCommand, string>(Container, accessCommand);
+            var response = await Application.ExecuteCommand<VerifyTokenCommand, string>(Container, accessCommand);
             if (response.NotSuccessful)
                 return response.Errors[0];
 
@@ -92,7 +92,7 @@ namespace TasksLibrary.Client
                 TaskId = taskId
             };
 
-            var deletedResponse = await Application.ExceuteCommand(Container, command);
+            var deletedResponse = await Application.ExecuteCommand(Container, command);
             if (deletedResponse.NotSuccessful)
                  return deletedResponse.Errors[0];
 
@@ -105,7 +105,7 @@ namespace TasksLibrary.Client
             {
                 RefreshToken = refreshToken
             };
-            var response = await Application.ExceuteCommand<GenerateTokenCommand,string>(Container, command);
+            var response = await Application.ExecuteCommand<GenerateTokenCommand,string>(Container, command);
             if (response.NotSuccessful)
                 return response.Errors[0];
             return response.Data;
