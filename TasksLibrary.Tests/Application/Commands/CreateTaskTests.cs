@@ -14,8 +14,19 @@ namespace TasksLibrary.Tests.Application.Commands
         protected override void SetUp()
         {
             base.SetUp();
-            Command.Validate();
+            
         }
+        [Test]
+        public void  ShouldValidateCommand()
+        {
+            //Act
+            var response = Command.Validate();
+
+            //Assert
+            Assert.That(response.Errors, Is.Empty);
+            Assert.That(response.IsSuccessful, Is.True);
+        }
+
         [Test]
         public async Task ShouldCreateTaskSuccessfully()
         {
@@ -34,6 +45,35 @@ namespace TasksLibrary.Tests.Application.Commands
             Assert.That(response.Errors, Is.Empty);
             Assert.That(response.Data, Is.TypeOf<Guid>());
         }
+
+        [Test]
+        public async Task ShouldFailToCreateIfUserDoesNotExist()
+        {
+            //Act
+            var response = await Handler.HandleCommand(Command);
+
+            //Assert
+            Assert.That(response.Errors.Single(), Is.EqualTo("User doesn't exist"));
+        }
+
+        [Test]
+        public async Task ShouldFailToCreateTaskIfCommitFails()
+        {
+            //Arrange
+            DbContext.Setup(s => s.Context.UserRepository.GetExistingEntityById(Command.UserId))
+                .ReturnsAsync(new User("Name", "adeolaaderibigbe09@gmail.com"));
+
+            DbContext.Setup(s => s.Context.NoteRepository.Add(It.IsAny<Note>()));
+
+            DbContext.AssumeCommitFails();
+
+            //Act
+            var response = await Handler.HandleCommand(Command);
+
+            //Assert
+            Assert.That(response.Errors.Single(), Is.EqualTo("Failed to create task"));
+        }
+
         protected override CreateTaskCommand CreateCommand()
         {
             return new CreateTaskCommand()
