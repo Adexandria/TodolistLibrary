@@ -84,7 +84,6 @@
 
     public class ActionTokenResult<T> : ActionResult<T>
     {
-        public T Data { get; set; }
         public string AccessToken { get; set; }
         public string RefreshToken { get; set; }
 

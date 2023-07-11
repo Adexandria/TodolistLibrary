@@ -13,7 +13,7 @@ namespace TasksLibrary.Application.Commands.Login
             var authenticatedUser = await Dbcontext.Context.UserRepository.AuthenticateUser(command.Email, command.Password);
             if (authenticatedUser == null)
             {
-                return FailedOperation("Invalid password or password", HttpStatusCode.BadRequest);
+                return FailedOperation("Invalid password or email", HttpStatusCode.BadRequest);
             }
          
 

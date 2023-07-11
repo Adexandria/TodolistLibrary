@@ -12,12 +12,12 @@ namespace TasksLibrary.Application.Commands.CreateTask
             var currentUser = await Dbcontext.Context.UserRepository.GetExistingEntityById(command.UserId);
 
             if (currentUser == null)
-                return FailedOperation("User doesn't exist");
+                return FailedOperation("User doesn't exist",System.Net.HttpStatusCode.NotFound);
 
             var newNote = new Note(command.Task);
 
-            if(command.Description != null) 
-                newNote.SetDescription(command.Description);
+            if (!string.IsNullOrEmpty(command.Description))
+                    newNote.SetDescription(command.Description);
 
             newNote.SetUser(currentUser);
 

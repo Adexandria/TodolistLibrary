@@ -8,7 +8,7 @@ namespace TasksLibrary.Models.Interfaces
 {
     public class TaskManagement
     {
-        public INoteRepository NoteRepository { get; set; }
-        public IUserRepository UserRepository { get; set; }
+        public virtual  INoteRepository NoteRepository { get; set; }
+        public virtual IUserRepository UserRepository { get; set; }
     }
 }

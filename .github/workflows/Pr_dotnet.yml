@@ -21,5 +21,7 @@ jobs:
       run: dotnet restore 
     - name: Build project
       run: dotnet build ${{env.project_file}} --no-restore
+    - name: test
+      run: dotnet test
 
 

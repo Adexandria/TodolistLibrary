@@ -10,7 +10,11 @@ namespace TasksLibrary.Application.Queries.FetchAllNotes
         {
             var currentNotes = QueryContext.Entities.Where(s=>s.User.Id == command.UserId).OrderByDescending(s => s.Created).ToList();
 
-            var notesDTO = currentNotes?.Select(s => new NoteDTO 
+            if (!currentNotes.Any())
+            {
+                return await Task.FromResult(FailedOperation("No notes found", System.Net.HttpStatusCode.NotFound));
+            }
+            var notesDTO = currentNotes.Select(s => new NoteDTO 
             { 
                 Description = s.Description,
                 Task = s.Task,

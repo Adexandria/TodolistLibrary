@@ -4,12 +4,14 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	<PackageVersion>$(PackageVersion)</PackageVersion>
     <Company>Adeola Aderibigbe</Company>
     <Description>A Todo list nuget package</Description>
     <RepositoryUrl>https://github.com/Adexandria/TodolistLibrary</RepositoryUrl>
     <PackageTags>to-dolist,.net 6.0</PackageTags>
     <AnalysisLevel>6.0</AnalysisLevel>
+	  
   </PropertyGroup>
 
   <ItemGroup>

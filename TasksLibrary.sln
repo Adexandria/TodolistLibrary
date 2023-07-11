@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TasksLibrary", "Library\Tas
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TasksLibrary.Client", "TasksLibrary.Client\TasksLibrary.Client.csproj", "{7FD805C9-760A-4C41-BD77-38F6747C6265}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TasksLibrary.Tests", "TasksLibrary.Tests\TasksLibrary.Tests.csproj", "{B6D98C98-36BC-499F-8816-52E79FED162B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{7FD805C9-760A-4C41-BD77-38F6747C6265}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7FD805C9-760A-4C41-BD77-38F6747C6265}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7FD805C9-760A-4C41-BD77-38F6747C6265}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6D98C98-36BC-499F-8816-52E79FED162B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6D98C98-36BC-499F-8816-52E79FED162B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6D98C98-36BC-499F-8816-52E79FED162B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6D98C98-36BC-499F-8816-52E79FED162B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

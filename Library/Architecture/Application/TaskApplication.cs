@@ -5,7 +5,7 @@ namespace TasksLibrary.Architecture.Application
 {
     public class TaskApplication : ITaskApplication
     {
-        public async Task<ActionResult<TResponse>> ExceuteCommand<TCommand,TResponse>(IContainer container,TCommand command) 
+        public async Task<ActionResult<TResponse>> ExecuteCommand<TCommand,TResponse>(IContainer container,TCommand command) 
             where TCommand : Command<TResponse>
         {
             var validationOutput = command.Validate();
@@ -27,7 +27,7 @@ namespace TasksLibrary.Architecture.Application
             }
         }
 
-        public async Task<ActionResult> ExceuteCommand<TCommand>(IContainer container, TCommand command) where TCommand : Command
+        public async Task<ActionResult> ExecuteCommand<TCommand>(IContainer container, TCommand command) where TCommand : Command
         {
             var validationOutput = command.Validate();
             if (validationOutput.NotSuccessful)

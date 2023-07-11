@@ -5,10 +5,10 @@ namespace TasksLibrary.Architecture.Application
 {
     public interface ITaskApplication
     {
-        Task<ActionResult<TResponse>> ExceuteCommand<TCommand,TResponse>(IContainer container,TCommand command) 
+        Task<ActionResult<TResponse>> ExecuteCommand<TCommand,TResponse>(IContainer container,TCommand command) 
             where TCommand : Command<TResponse>;
 
-        Task<ActionResult> ExceuteCommand<TCommand>(IContainer container, TCommand command)
+        Task<ActionResult> ExecuteCommand<TCommand>(IContainer container, TCommand command)
            where TCommand : Command;
 
         Task<ActionResult<TResponse>> SendQuery<TQuery,TResponse>(IContainer container,TQuery query)
