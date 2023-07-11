@@ -4,6 +4,7 @@ namespace TasksLibrary.Architecture.Database
 {
     public class QueryContext<T>
     {
+        protected QueryContext() { }
         public QueryContext(ISession session)
         {
             Session = session;
@@ -11,6 +12,6 @@ namespace TasksLibrary.Architecture.Database
 
         public ISession Session { get; set; }
 
-        public IQueryable<T> Entities => Session.Query<T>();
+        public virtual IQueryable<T> Entities => Session.Query<T>();
     }
 }

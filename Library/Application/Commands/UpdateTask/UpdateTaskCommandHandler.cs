@@ -10,12 +10,12 @@ namespace TasksLibrary.Application.Commands.UpdateTask
         {
             var currentTask = await Dbcontext.Context.NoteRepository.GetExistingEntityById(command.TaskId);
             if (currentTask == null)
-                return FailedOperation("Note doesn't exist",System.Net.HttpStatusCode.BadRequest);
+                return FailedOperation("Note doesn't exist",System.Net.HttpStatusCode.NotFound);
 
             currentTask.Task = command.Task;
             currentTask.Modified = DateTime.UtcNow;
 
-            if(command.Description != null) 
+            if(!string.IsNullOrEmpty(command.Description)) 
                 currentTask.Description = command.Description;
 
             await Dbcontext.Context.NoteRepository.Update(currentTask);

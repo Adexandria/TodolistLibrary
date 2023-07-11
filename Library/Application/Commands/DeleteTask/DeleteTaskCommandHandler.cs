@@ -11,7 +11,7 @@ namespace TasksLibrary.Application.Commands.DeleteTask
            var currentTask = await Dbcontext.Context.NoteRepository.GetExistingEntityById(command.TaskId);
 
             if (currentTask == null)
-                return FailedOperation("Note doesn't exist",System.Net.HttpStatusCode.BadRequest);
+                return FailedOperation("Note doesn't exist",System.Net.HttpStatusCode.NotFound);
 
             await Dbcontext.Context.NoteRepository.Delete(currentTask);
 

@@ -16,7 +16,7 @@ namespace TasksLibrary.Application.Commands.GenerateToken
             var user = await Dbcontext.Context.UserRepository.GetExistingEntityById(userId.Id);
 
             if (user == null)
-                return FailedOperation("Invalid User",System.Net.HttpStatusCode.BadRequest);
+                return FailedOperation("Invalid user",System.Net.HttpStatusCode.NotFound);
 
             var accessToken = Dbcontext.Context.AuthenTokenRepository.GenerateAccessToken(user);
 

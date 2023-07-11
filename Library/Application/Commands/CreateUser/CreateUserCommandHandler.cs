@@ -14,7 +14,7 @@ namespace TasksLibrary.Application.Commands.CreateUser
             var isExist = await Dbcontext.Context.UserRepository.IsExist(command.Email);
             if (isExist)
             {
-                return FailedOperation("The email already exists", HttpStatusCode.BadRequest);
+                return FailedOperation("This email already exists", HttpStatusCode.BadRequest);
             }
 
             var newUser = new User(command.Name, command.Email);
@@ -25,7 +25,7 @@ namespace TasksLibrary.Application.Commands.CreateUser
             await Dbcontext.Context.UserRepository.Add(newUser);
             var commitStatus = await Dbcontext.CommitAsync();
             if (commitStatus.NotSuccessful)
-                return FailedOperation("Couldn't create new user", HttpStatusCode.BadRequest);
+                return FailedOperation("Couldn't create new user");
 
             var createdUser = new CreateUserDTO()
             {

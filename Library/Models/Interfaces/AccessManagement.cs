@@ -8,10 +8,10 @@ namespace TasksLibrary.Models.Interfaces
 {
     public class AccessManagement
     {
-        public IUserRepository  UserRepository { get;set;}
-        public IAuthToken AuthenTokenRepository { get; set; }
-        public IAccessTokenRepository AccessTokenRepository { get; set; }
-        public IRefreshTokenRepository RefreshTokenRepository { get; set; }
+        public virtual IUserRepository  UserRepository { get;set;}
+        public virtual IAuthToken AuthenTokenRepository { get; set; }
+        public virtual IAccessTokenRepository AccessTokenRepository { get; set; }
+        public virtual IRefreshTokenRepository RefreshTokenRepository { get; set; }
         
     }
 }

@@ -24,6 +24,8 @@ namespace TasksLibrary.Utilities
         }
         public RequestValidator IsEmail(string s, string error)
         {
+            if(string.IsNullOrEmpty(s))
+                return IsText(s, error);
             Regex regex = new("^[^@\\s]+@[^@\\s]+\\.(com|net|org|gov)$");
             AddCheck(regex.IsMatch(s), error);
             return this;

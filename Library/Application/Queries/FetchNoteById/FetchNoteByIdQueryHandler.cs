@@ -1,5 +1,4 @@
-﻿using NHibernate.Linq;
-using TasksLibrary.Application.Queries.FetchAllNotes;
+﻿using TasksLibrary.Application.Queries.FetchAllNotes;
 using TasksLibrary.Utilities;
 using TasksLibrary.Models;
 using TasksLibrary.Architecture.Database;
@@ -10,10 +9,10 @@ namespace TasksLibrary.Application.Queries.FetchNoteById
     {
         public override async Task<ActionResult<NoteDTO>> HandleAsync(FetchNoteByIdQuery command)
         {
-            var currentTask = await QueryContext.Entities.Where(s => s.Id.Equals(command.TaskId) && s.User.Id == command.UserId).FirstOrDefaultAsync();
+            var currentTask = QueryContext.Entities.Where(s => s.Id == command.TaskId && s.User.Id == command.UserId).FirstOrDefault();
 
             if (currentTask == null)
-                return FailedOperation("Note doesn't exist",System.Net.HttpStatusCode.BadRequest);
+                return await Task.FromResult(FailedOperation("Note doesn't exist",System.Net.HttpStatusCode.NotFound));
 
             var noteDto = new NoteDTO
             {
@@ -22,7 +21,7 @@ namespace TasksLibrary.Application.Queries.FetchNoteById
                 Task = currentTask.Task
             };
 
-            return SuccessfulOperation(noteDto);
+            return await Task.FromResult(SuccessfulOperation(noteDto));
         }
     }
 }
