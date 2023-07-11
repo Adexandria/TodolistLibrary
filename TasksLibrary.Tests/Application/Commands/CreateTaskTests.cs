@@ -3,29 +3,29 @@ using TasksLibrary.Application.Commands.CreateTask;
 using TasksLibrary.Architecture.Database;
 using TasksLibrary.Models;
 using TasksLibrary.Models.Interfaces;
-using TasksLibrary.Tests.DB;
+using TasksLibrary.Tests.Utilities;
 
 namespace TasksLibrary.Tests.Application.Commands
 {
     [TestFixture]
-    public class CreateTaskTests : CommandHandlerTest<CreateTaskCommand,CreateTaskCommandHandler,Guid,DbContext<TaskManagement>,DbContextMock>
+    public class CreateTaskTests : CommandHandlerTest<CreateTaskCommand,CreateTaskCommandHandler,Guid,DbContext<TaskManagement>,TaskDbContextMock>
     {
-        [SetUp]
-        protected override void SetUp()
-        {
-            base.SetUp();
-            
-        }
+
         [Test]
-        public void  ShouldValidateCommand()
+        public void ShouldFailToValidate()
         {
+            //Arrange
+            var command = new CreateTaskCommand();
+
             //Act
-            var response = Command.Validate();
+            var response = command.Validate();
 
             //Assert
-            Assert.That(response.Errors, Is.Empty);
-            Assert.That(response.IsSuccessful, Is.True);
+            Assert.That(response.Errors.Count, Is.EqualTo(1));
+            Assert.That(response.IsSuccessful, Is.False);
         }
+
+
 
         [Test]
         public async Task ShouldCreateTaskSuccessfully()
@@ -45,6 +45,27 @@ namespace TasksLibrary.Tests.Application.Commands
             Assert.That(response.Errors, Is.Empty);
             Assert.That(response.Data, Is.TypeOf<Guid>());
         }
+
+        [Test]
+        public async Task ShouldCreateTaskSuccessfullyIfDescriptionIsEmpty()
+        {
+            //Arrange
+            DbContext.Setup(s => s.Context.UserRepository.GetExistingEntityById(Command.UserId))
+                .ReturnsAsync(new User("Name", "adeolaaderibigbe09@gmail.com"));
+
+            DbContext.Setup(s => s.Context.NoteRepository.Add(It.IsAny<Note>()));
+
+            DbContext.AssumeCommitSuccessfully();
+            Command.Description = string.Empty;
+
+            //Act
+            var response = await Handler.HandleCommand(Command);
+
+            //Assert
+            Assert.That(response.Errors, Is.Empty);
+            Assert.That(response.Data, Is.TypeOf<Guid>());
+        }
+
 
         [Test]
         public async Task ShouldFailToCreateIfUserDoesNotExist()
