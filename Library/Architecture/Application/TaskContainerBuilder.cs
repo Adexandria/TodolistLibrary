@@ -19,7 +19,7 @@ namespace TasksLibrary.Architecture.Application
             ConnectionString = _connectionString;         
         }
 
-        public IContainer Build()
+        public void BuildMigration()
         {
             using (var service = BuildMigrationRunner())
             {
@@ -29,9 +29,8 @@ namespace TasksLibrary.Architecture.Application
                     runner.MigrateUp();
                 }
             }
-           return SetUpDepedencies().Build();
         }
-        private ContainerBuilder SetUpDepedencies()
+        public ContainerBuilder SetUpDepedencies()
         {
             var builder = new ContainerBuilder();
 

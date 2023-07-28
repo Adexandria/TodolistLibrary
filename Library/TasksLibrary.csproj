@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-	<PackageVersion>$(PackageVersion)</PackageVersion>
+    <GeneratePackageOnBuild>Truetrue</GeneratePackageOnBuild>
+	<PackageVersion>1.1.0</PackageVersion>
     <Company>Adeola Aderibigbe</Company>
     <Description>A Todo list nuget package</Description>
     <RepositoryUrl>https://github.com/Adexandria/TodolistLibrary</RepositoryUrl>
@@ -13,7 +13,6 @@
     <AnalysisLevel>6.0</AnalysisLevel>
 	  
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Autofac" Version="7.0.1" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
@@ -24,6 +23,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.8.0" />
+    <PackageReference Include="NHibernate.MiniProfiler" Version="4.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.8.0" />
   </ItemGroup>

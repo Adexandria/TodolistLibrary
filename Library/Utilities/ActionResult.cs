@@ -2,6 +2,7 @@
 {
     public class ActionResult<T> : ActionResult 
     {
+        internal ActionResult() { }
         public T Data { get; set; }
         public static ActionResult<T> SuccessfulOperation(T data)
         {
