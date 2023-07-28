@@ -23,7 +23,8 @@ namespace TasksLibrary.Models
 
         public virtual void SetUser(User user)
         {
-            User = user;
+            user.Notes.Add(this);   
+            User = user; 
         }
 
         public virtual string Task { get; set; }

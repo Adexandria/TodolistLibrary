@@ -7,8 +7,7 @@ namespace TasksLibrary.Architecture.TaskModule
     {
         public TaskManagementContext(ISession session, TaskManagement context,
             INoteRepository noteRepository,
-             IUserRepository userRepository,
-             IAuthToken token) : base(session)
+             IUserRepository userRepository) : base(session)
         {
             Context = context;
             Context.NoteRepository = noteRepository;

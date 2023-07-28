@@ -3,7 +3,7 @@
 
 namespace TasksLibrary.DB.Migrations
 {
-    [Migration(202302281002)]
+    [Migration(202302281002,"Create_database_objects")]
     public class InitialMigration : ForwardOnlyMigration
     {
         public override void Up()
@@ -26,7 +26,7 @@ namespace TasksLibrary.DB.Migrations
                 .WithColumn("Id").AsGuid().PrimaryKey().NotNullable().WithDefault(SystemMethods.NewGuid)
                 .WithColumn("Token").AsString(255).NotNullable()
                 .WithColumn("Expires").AsDateTime().NotNullable()
-                .WithColumn("IsRevoked").AsDateTime().NotNullable()
+                .WithColumn("IsRevoked").AsBoolean().NotNullable()
                 .WithColumn("User_id").AsGuid().Nullable();
 
             Create.ForeignKey("FK_User_AccessToken")
