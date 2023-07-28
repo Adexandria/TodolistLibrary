@@ -6,8 +6,8 @@ using TasksLibrary.Architecture.Application;
 
 var containerBuilder = new TaskContainerBuilder("Data Source=(localdb)\\MSSQLLocalDB;Database=TodoList;Integrated Security=True;Connect Timeout=30;");
 
-var container = containerBuilder.Build();
-
+containerBuilder.BuildMigration();
+var container = containerBuilder.SetUpDepedencies().Build();
 ITaskApplication application = new TaskApplication();
 
 var command = new Command(container,application);
