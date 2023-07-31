@@ -8,6 +8,7 @@ var containerBuilder = new TaskContainerBuilder("Data Source=(localdb)\\MSSQLLoc
 
 containerBuilder.BuildMigration();
 var container = containerBuilder.SetUpDepedencies().Build();
+
 ITaskApplication application = new TaskApplication();
 
 var command = new Command(container,application);
