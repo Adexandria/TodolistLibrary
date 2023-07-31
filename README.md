@@ -24,3 +24,30 @@ Alternatively, you can also install the package using the Package Manager Consol
 - In the Package Manager Console, type the following command:
 
 `Install-Package Adeola.TodoListLibrary --version 1.0.24`
+
+
+### How to use
+
+> **Note**
+> This shows how to use the library in console application
+
+- Create an instance of the container builder and pass in the connection string
+
+   `var containerBuilder = new TaskContainerBuilder("connection string");`
+  
+-   Build the migration
+    
+    `containerBuilder.BuildMigration();`
+    
+-   Create the container to set up dependencies
+   
+    `var container = containerBuilder.SetUpDepedencies().Build();`
+
+-  Create an instance of the task application
+  
+   `ITaskApplication application = new TaskApplication();`
+
+- You can use the application instance to perform queries and execute commands.
+
+#### Check how to use the library in web api
+ [AdeNoteAPI](https://github.com/Adeola-Aderibigbe/AdeNoteAPI)
