@@ -1,12 +1,13 @@
 ﻿using TasksLibrary.Application.Commands.VerifyToken;
 using TasksLibrary.Architecture.Database;
 using TasksLibrary.Models.Interfaces;
+using TasksLibrary.Services;
 using TasksLibrary.Tests.Utilities;
 
 namespace TasksLibrary.Tests.Application.Commands
 {
     [TestFixture]
-    public class VerifyTokenTests : CommandHandlerTest<VerifyTokenCommand,VerifyTokenCommandHandler,string, DbContext<AccessManagement>,AccessDbContextMock>
+    public class VerifyTokenTests : CommandHandlerTest<VerifyTokenCommand,VerifyTokenCommandHandler,UserDTO, DbContext<AccessManagement>,AccessDbContextMock>
     {
 
         [Test]
@@ -40,14 +41,14 @@ namespace TasksLibrary.Tests.Application.Commands
         public async Task ShoulVerifyTokenSuccessfully()
         {
             //Arrange
-            DbContext.Setup(s => s.Context.AuthenTokenRepository.VerifyToken(Command.AccessToken)).Returns("userId");
+            DbContext.Setup(s => s.Context.AuthenTokenRepository.VerifyToken(Command.AccessToken)).Returns(new UserDTO("00000000-0000-0000-0000-000000000000","email"));
 
             //Act
             var response = await Handler.HandleCommand(Command);
 
             //Assert
             Assert.That(response.IsSuccessful, Is.True);
-            Assert.That(response.Data,Is.TypeOf<string>());
+            Assert.That(response.Data,Is.TypeOf<UserDTO>());
         }
 
         protected override VerifyTokenCommand CreateCommand()

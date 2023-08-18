@@ -23,7 +23,7 @@ namespace TasksLibrary.Application.Commands.Login
                await Dbcontext.Context.AccessTokenRepository.Delete(authenticatedUser.AccessToken);
             }
 
-            string accessToken =  Dbcontext.Context.AuthenTokenRepository.GenerateAccessToken(authenticatedUser);
+            string accessToken =  Dbcontext.Context.AuthenTokenRepository.GenerateAccessToken(authenticatedUser.Id,authenticatedUser.Email);
             string refreshToken = Dbcontext.Context.AuthenTokenRepository.GenerateRefreshToken();
 
             var accessTokenModel = new AccessToken(accessToken, new UserId(authenticatedUser.Id));

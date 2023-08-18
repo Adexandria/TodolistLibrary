@@ -3,6 +3,7 @@ using TasksLibrary.Application.Commands.VerifyToken;
 using TasksLibrary.Application.Queries.FetchAllNotes;
 using TasksLibrary.Application.Queries.FetchNoteById;
 using TasksLibrary.Architecture.Application;
+using TasksLibrary.Services;
 
 namespace TasksLibrary.Client
 {
@@ -21,10 +22,10 @@ namespace TasksLibrary.Client
                 AccessToken = accessToken
             };
 
-            var response = await Application.ExecuteCommand<VerifyTokenCommand, string>(Container, accessCommand);
+            var response = await Application.ExecuteCommand<VerifyTokenCommand, UserDTO>(Container, accessCommand);
             if (response.NotSuccessful)
                 return response.Errors[0];
-            var getAllTasksResponse = await Application.SendQuery<FetchAllNotesQuery, List<NoteDTO>>(Container, new FetchAllNotesQuery() { UserId = new Guid(response.Data)});
+            var getAllTasksResponse = await Application.SendQuery<FetchAllNotesQuery, List<NoteDTO>>(Container, new FetchAllNotesQuery() { UserId = response.Data.UserId});
             return getAllTasksResponse.Data;
         }
 
@@ -36,13 +37,13 @@ namespace TasksLibrary.Client
                 AccessToken = accessToken
             };
 
-            var response = await Application.ExecuteCommand<VerifyTokenCommand, string>(Container, accessCommand);
+            var response = await Application.ExecuteCommand<VerifyTokenCommand, UserDTO>(Container, accessCommand);
             if (response.NotSuccessful)
                 return response.Errors[0];
             var command = new FetchNoteByIdQuery()
             {
                 TaskId = taskId,
-                UserId = new Guid(response.Data)
+                UserId = response.Data.UserId
             };
             var taskResponse = await Application.SendQuery<FetchNoteByIdQuery,NoteDTO>(Container, command);
 

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TasksLibrary.Services;
 using TasksLibrary.Utilities;
 
 namespace TasksLibrary.Application.Commands.VerifyToken
 {
-    public class VerifyTokenCommand : Command<string>
+    public class VerifyTokenCommand : Command<UserDTO>
     {
         public override ActionResult Validate()
         {

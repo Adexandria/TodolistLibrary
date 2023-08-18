@@ -7,6 +7,7 @@ using TasksLibrary.Application.Commands.Login;
 using TasksLibrary.Application.Commands.UpdateTask;
 using TasksLibrary.Application.Commands.VerifyToken;
 using TasksLibrary.Architecture.Application;
+using TasksLibrary.Services;
 
 namespace TasksLibrary.Client
 {
@@ -40,7 +41,7 @@ namespace TasksLibrary.Client
                 AccessToken = accessToken
             };
 
-            var response = await Application.ExecuteCommand<VerifyTokenCommand,string>(Container,accessCommand);
+            var response = await Application.ExecuteCommand<VerifyTokenCommand,UserDTO>(Container,accessCommand);
             if (response.NotSuccessful)
                 return response.Errors[0];
 
@@ -48,7 +49,7 @@ namespace TasksLibrary.Client
             {
                 Task = newNote.Task,
                 Description = newNote.Description,
-                UserId = new Guid(response.Data)
+                UserId = response.Data.UserId
             };
 
             var createdResponse = await Application.ExecuteCommand<CreateTaskCommand,Guid>(Container,taskCommand);
@@ -66,7 +67,7 @@ namespace TasksLibrary.Client
                 AccessToken = accessToken
             };
 
-            var response = await Application.ExecuteCommand<VerifyTokenCommand, string>(Container, accessCommand);
+            var response = await Application.ExecuteCommand<VerifyTokenCommand, UserDTO>(Container, accessCommand);
             if (response.NotSuccessful)
                 return response.Errors[0];
 
@@ -83,7 +84,7 @@ namespace TasksLibrary.Client
                 AccessToken = accessToken
             };
 
-            var response = await Application.ExecuteCommand<VerifyTokenCommand, string>(Container, accessCommand);
+            var response = await Application.ExecuteCommand<VerifyTokenCommand, UserDTO>(Container, accessCommand);
             if (response.NotSuccessful)
                 return response.Errors[0];
 

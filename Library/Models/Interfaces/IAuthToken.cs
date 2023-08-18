@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using TasksLibrary.Services;
 
 namespace TasksLibrary.Models.Interfaces
 {
     public interface IAuthToken
     {
-        string GenerateAccessToken(User user);
+        string GenerateAccessToken(Guid userId,string email);
         string GenerateRefreshToken();
-        string VerifyToken(string token);
+        UserDTO VerifyToken(string token);
         
         
     }

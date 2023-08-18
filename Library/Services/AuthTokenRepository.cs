@@ -1,27 +1,22 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
-using TasksLibrary.Models;
 using TasksLibrary.Models.Interfaces;
-using TasksLibrary.DB;
 
 namespace TasksLibrary.Services
 {
     public class AuthTokenRepository :IAuthToken
     {
-        public string GenerateAccessToken(User user)
+        public string GenerateAccessToken(Guid userId, string email)
         {
             var securityTokenDescriptor = new SecurityTokenDescriptor
             {
                 Claims = new Dictionary<string, object>()
                 {
-                    { "id", user.Id.ToString("N") }
+                    { "id", userId.ToString("N") },
+                    { ClaimTypes.Email,email }
                 },
                 Expires = DateTime.UtcNow.AddMinutes(5),
                 SigningCredentials = new SigningCredentials(GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256Signature)
@@ -43,7 +38,7 @@ namespace TasksLibrary.Services
             return refreshtoken;
         }
 
-        public string VerifyToken(string token)
+        public UserDTO VerifyToken(string token)
         {
             TokenValidationParameters tokenValidationParameters = GetTokenValidationParameters();
 
@@ -52,7 +47,10 @@ namespace TasksLibrary.Services
             {
                 var claims = jwtSecurityTokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken validatedToken);
                 var userId = claims.FindFirst("id").Value;
-                return userId;
+                var email = claims.FindFirst(ClaimTypes.Email).Value;
+
+                var userDto = new UserDTO(userId, email);
+                return userDto;
             }
             catch(Exception ex)
             {

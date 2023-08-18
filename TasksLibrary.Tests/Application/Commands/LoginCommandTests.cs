@@ -53,7 +53,7 @@ namespace TasksLibrary.Tests.Application.Commands
             DbContext.Setup(s => s.Context.AccessTokenRepository.Delete(It.IsAny<AccessToken>()));
             DbContext.Setup(s => s.Context.UserRepository.Update(It.IsAny<User>()));
             DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateRefreshToken()).Returns("refreshToken");
-            DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateAccessToken(user)).Returns("accessToken");
+            DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateAccessToken(user.Id,user.Email)).Returns("accessToken");
             DbContext.AssumeCommitFails();
 
             //Act
@@ -79,7 +79,7 @@ namespace TasksLibrary.Tests.Application.Commands
             DbContext.Setup(s => s.Context.AccessTokenRepository.Delete(It.IsAny<AccessToken>()));
             DbContext.Setup(s => s.Context.UserRepository.Update(It.IsAny<User>()));
             DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateRefreshToken()).Returns("refreshToken");
-            DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateAccessToken(user)).Returns("accessToken");
+            DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateAccessToken(user.Id, user.Email)).Returns("accessToken");
             DbContext.AssumeCommitSuccessfully();
 
             //Act
@@ -101,7 +101,7 @@ namespace TasksLibrary.Tests.Application.Commands
             DbContext.Setup(s => s.Context.UserRepository.Update(It.IsAny<User>()));
             DbContext.AssumeCommitSuccessfully();
             DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateRefreshToken()).Returns("refreshToken");
-            DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateAccessToken(user)).Returns("accessToken");
+            DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateAccessToken(user.Id, user.Email)).Returns("accessToken");
 
             //Act
             var response = await Handler.HandleCommand(Command);
