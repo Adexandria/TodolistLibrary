@@ -6,6 +6,7 @@ on:
 
 env:
   project_file: 'Library/TasksLibrary.csproj'
+  client_file: 'TasksLibrary.Client/TasksLibrary.Client.csproj'
 
 
 jobs:
@@ -21,6 +22,8 @@ jobs:
       run: dotnet restore 
     - name: Build project
       run: dotnet build ${{env.project_file}} --no-restore
+    - name: Build client
+      run: dotnet build ${{env.client_file}} --no-restore
     - name: test
       run: dotnet test
 
