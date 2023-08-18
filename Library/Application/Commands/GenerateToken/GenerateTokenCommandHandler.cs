@@ -18,7 +18,7 @@ namespace TasksLibrary.Application.Commands.GenerateToken
             if (user == null)
                 return FailedOperation("Invalid user",System.Net.HttpStatusCode.NotFound);
 
-            var accessToken = Dbcontext.Context.AuthenTokenRepository.GenerateAccessToken(user);
+            var accessToken = Dbcontext.Context.AuthenTokenRepository.GenerateAccessToken(user.Id,user.Email);
 
             return SuccessfulOperation(accessToken);
         }
