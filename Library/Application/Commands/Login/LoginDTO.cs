@@ -9,6 +9,7 @@ namespace TasksLibrary.Application.Commands.Login
 {
     public class LoginDTO : CreateUserDTO
     {
-
+        public string AccessToken { get; set; }
+        public string RefreshToken { get; set; }
     }
 }

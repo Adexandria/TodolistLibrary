@@ -5,7 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>Truetrue</GeneratePackageOnBuild>
-	<PackageVersion>1.1.1</PackageVersion>
+	<PackageVersion>1.1.2</PackageVersion>
     <Company>Adeola Aderibigbe</Company>
     <Description>A Todo list nuget package</Description>
     <RepositoryUrl>https://github.com/Adexandria/TodolistLibrary</RepositoryUrl>

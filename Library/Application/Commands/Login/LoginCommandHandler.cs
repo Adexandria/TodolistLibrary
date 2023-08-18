@@ -37,13 +37,15 @@ namespace TasksLibrary.Application.Commands.Login
             var loginDTO = new LoginDTO()
             {
                 Email = authenticatedUser.Email,
-                Name = authenticatedUser.Name
+                Name = authenticatedUser.Name,
+                AccessToken = accessToken,
+                RefreshToken = refreshToken
             };
             var commitStatus = await Dbcontext.CommitAsync();
             if (commitStatus.NotSuccessful)
                 return FailedOperation("Failed to login user");
 
-            return SuccessfulOperation(loginDTO,accessToken,refreshToken);
+            return SuccessfulOperation(loginDTO);
 
         }
     }
