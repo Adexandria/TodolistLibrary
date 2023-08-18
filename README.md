@@ -41,7 +41,7 @@ Install-Package Adeola.TodoListLibrary --version 1.0.24
 ---
 Using nuget
 
-Install-Package TasksLibrary -Version 1.1.1
+Install-Package TasksLibrary -Version 1.1.3
 ```
 
 
@@ -52,9 +52,9 @@ Install-Package TasksLibrary -Version 1.1.1
 
 - Create an instance of the container builder and pass in the connection string
 
-```
+  ```
   var containerBuilder = new TaskContainerBuilder("connection string");
-```
+  ```
   
 -   Build the migration
     
