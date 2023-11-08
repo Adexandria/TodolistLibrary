@@ -12,8 +12,8 @@ namespace TasksLibrary.DB.Migrations
                 .WithColumn("Id").AsGuid().PrimaryKey().NotNullable()
                 .WithColumn("Created").AsDateTime().NotNullable()
                 .WithColumn("Modified").AsDateTime().NotNullable()
-                .WithColumn("Task").AsString(450).NotNullable()
-                .WithColumn("Description").AsString(450).Nullable()
+                .WithColumn("Task").AsString(int.MaxValue).NotNullable()
+                .WithColumn("Description").AsString(int.MaxValue).Nullable()
                 .WithColumn("User_id").AsGuid().NotNullable();
 
             Create.ForeignKey("Fk_Notes_User")

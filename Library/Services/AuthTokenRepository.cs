@@ -9,6 +9,10 @@ namespace TasksLibrary.Services
 {
     public class AuthTokenRepository :IAuthToken
     {
+        public AuthTokenRepository(string securitykey)
+        {
+            _securityToken = securitykey;
+        }
         public string GenerateAccessToken(Guid userId, string email)
         {
             var securityTokenDescriptor = new SecurityTokenDescriptor
@@ -61,7 +65,7 @@ namespace TasksLibrary.Services
         
         private SecurityKey GetSymmetricSecurityKey()
         {
-            byte[] symmetricKey = Encoding.UTF8.GetBytes("SecretKeyTaskApplication@1345");
+            byte[] symmetricKey = Encoding.UTF8.GetBytes(_securityToken);
             return new SymmetricSecurityKey(symmetricKey);
         }
 
@@ -74,5 +78,7 @@ namespace TasksLibrary.Services
                 IssuerSigningKey = GetSymmetricSecurityKey()
             };
         }
+
+        private readonly string _securityToken;
     }
 }

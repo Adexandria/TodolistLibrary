@@ -30,7 +30,7 @@ namespace TasksLibrary.Architecture.Application
                 }
             }
         }
-        public ContainerBuilder SetUpDepedencies()
+        public ContainerBuilder SetUpDepedencies(string securityKey)
         {
             var builder = new ContainerBuilder();
 
@@ -46,7 +46,7 @@ namespace TasksLibrary.Architecture.Application
                 .As<IRefreshTokenRepository>()
                 .InstancePerLifetimeScope();
 
-            builder.RegisterType<AuthTokenRepository>()
+            builder.Register((_)=> new AuthTokenRepository(securityKey))
                 .As<IAuthToken>()
                 .InstancePerLifetimeScope();
 

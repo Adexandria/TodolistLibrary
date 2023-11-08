@@ -10,21 +10,21 @@ namespace TasksLibrary.DB.Migrations
         {
             Create.Table("Users")
                 .WithColumn("Id").AsGuid().PrimaryKey().NotNullable().WithDefault(SystemMethods.NewGuid)
-                .WithColumn("Email").AsString(255).NotNullable()
-                .WithColumn("Name").AsString(255).NotNullable()
+                .WithColumn("Email").AsString(int.MaxValue).NotNullable()
+                .WithColumn("Name").AsString(int.MaxValue).NotNullable()
                 .WithColumn("AccessToken_id").AsGuid().Nullable()
-                .WithColumn("PasswordHash").AsString(255).NotNullable()
-                .WithColumn("Salt").AsString(255).NotNullable()
+                .WithColumn("PasswordHash").AsString(int.MaxValue).NotNullable()
+                .WithColumn("Salt").AsString(int.MaxValue).NotNullable()
                 .WithColumn("RefreshToken_id").AsGuid().Nullable();
 
             Create.Table("AccessTokens")
                 .WithColumn("Id").AsGuid().PrimaryKey().NotNullable().WithDefault(SystemMethods.NewGuid)
-                .WithColumn("Token").AsString(255).NotNullable()
+                .WithColumn("Token").AsString(int.MaxValue).NotNullable()
                 .WithColumn("User_id").AsGuid().Nullable();
 
             Create.Table("RefreshTokens")
                 .WithColumn("Id").AsGuid().PrimaryKey().NotNullable().WithDefault(SystemMethods.NewGuid)
-                .WithColumn("Token").AsString(255).NotNullable()
+                .WithColumn("Token").AsString(int.MaxValue).NotNullable()
                 .WithColumn("Expires").AsDateTime().NotNullable()
                 .WithColumn("IsRevoked").AsBoolean().NotNullable()
                 .WithColumn("User_id").AsGuid().Nullable();

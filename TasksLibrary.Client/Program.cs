@@ -4,10 +4,10 @@ using TasksLibrary.Application.Commands.UpdateTask;
 using TasksLibrary.Client;
 using TasksLibrary.Architecture.Application;
 
-var containerBuilder = new TaskContainerBuilder("Data Source=(localdb)\\MSSQLLocalDB;Database=TodoList;Integrated Security=True;Connect Timeout=30;");
+var containerBuilder = new TaskContainerBuilder("empty");
 
 containerBuilder.BuildMigration();
-var container = containerBuilder.SetUpDepedencies().Build();
+var container = containerBuilder.SetUpDepedencies("SecretKey@1234").Build();
 
 ITaskApplication application = new TaskApplication();
 
@@ -19,14 +19,14 @@ var createUsercommand = new CreateUserCommand()
 {
     Password = "1234",
     ConfirmPassword = "1234",
-    Email = "adeolaaderibigbe09@gmail.com",
+    Email = "adeolaaderibigbe@gmail.com",
     Name = "Adeola Aderibigbe"
 };
 
 var loginCommand = new LoginCommand()
 {
     Password ="1234",
-    Email ="adeolaaderibigbe09@gmail.com"
+    Email = "adeola.aderibigbe@cyphercrescent.com"
 };
 var UpdatedCommand = new UpdateTaskCommand()
 {
@@ -41,26 +41,26 @@ var dto = new CreateTaskDTO()
     Description = "This is my first task"
 };
 
-/*//To create user
-var result = await command.CreateUser(createUsercommand);
+//To create user
+/*var result = await command.CreateUser(createUsercommand);
 Console.WriteLine(result.GetType().Name == "String" ? result : $"{result.Name} and {result.Email} \n User has been added");*/
 
 //To Login user
 var loginResult = await command.LoginUser(loginCommand);
 Console.WriteLine(loginResult.GetType().Name == "String" ? loginResult : $"AccessToken: {loginResult.AccessToken}\nRefreshToken: {loginResult.RefreshToken}");
 
-if (loginResult.IsSuccessful)
+/*if (loginResult.IsSuccessful)
 {
 
     //Create a new to-do list
-    /*
+    *//*
      * 
       var result = await command.CreateTask(dto, loginResult.AccessToken);
-      Console.WriteLine(result.GetType().Name == "String" ? $"Error: {result}" : $"TaskId: {result} created successfully");*/
+      Console.WriteLine(result.GetType().Name == "String" ? $"Error: {result}" : $"TaskId: {result} created successfully");*//*
 
     //Update to-do list
     
-   /* var updatedResult = await command.UpdateTask(UpdatedCommand, loginResult.AccessToken);
+   *//* var updatedResult = await command.UpdateTask(UpdatedCommand, loginResult.AccessToken);
     Console.WriteLine(updatedResult.GetType().Name == "String" ? updatedResult : "Updated successfully");
 
     // Get all to-do lists
@@ -84,6 +84,6 @@ if (loginResult.IsSuccessful)
 
     //Delete list
     var deletedResult = await command.DeleteTask(new Guid("ce0e4999-c9ca-4ebc-8cd9-b00d00d92bd5"), loginResult.AccessToken);
-    Console.WriteLine(deletedResult.GetType().Name == "String" ? deletedResult : "Deleted successfully");*/
-}
+    Console.WriteLine(deletedResult.GetType().Name == "String" ? deletedResult : "Deleted successfully");*//*
+}*/
 
