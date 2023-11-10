@@ -47,7 +47,6 @@ namespace TasksLibrary.Architecture.Application
                 .InstancePerLifetimeScope();
 
             builder.Register((_)=> new AuthTokenRepository(securityKey))
-                .As<IAuthToken>()
                 .InstancePerLifetimeScope();
 
             builder.RegisterType<PasswordManager>()

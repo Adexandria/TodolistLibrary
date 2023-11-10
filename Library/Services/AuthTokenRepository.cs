@@ -9,6 +9,10 @@ namespace TasksLibrary.Services
 {
     public class AuthTokenRepository :IAuthToken
     {
+        public AuthTokenRepository()
+        {
+
+        }
         public AuthTokenRepository(string securitykey)
         {
             _securityToken = securitykey;

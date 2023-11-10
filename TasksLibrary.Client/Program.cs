@@ -4,10 +4,10 @@ using TasksLibrary.Application.Commands.UpdateTask;
 using TasksLibrary.Client;
 using TasksLibrary.Architecture.Application;
 
-var containerBuilder = new TaskContainerBuilder("empty");
+var containerBuilder = new TaskContainerBuilder("Server=localhost\\SQLEXPRESS;Database=master;Trusted_Connection=True;TrustServerCertificate=true;");
 
 containerBuilder.BuildMigration();
-var container = containerBuilder.SetUpDepedencies("SecretKey@1234").Build();
+var container = containerBuilder.SetUpDepedencies("SecretKeyApp@1234").Build();
 
 ITaskApplication application = new TaskApplication();
 
@@ -26,7 +26,7 @@ var createUsercommand = new CreateUserCommand()
 var loginCommand = new LoginCommand()
 {
     Password ="1234",
-    Email = "adeola.aderibigbe@cyphercrescent.com"
+    Email = "adeolaaderibigbe@gmail.com"
 };
 var UpdatedCommand = new UpdateTaskCommand()
 {
@@ -41,13 +41,13 @@ var dto = new CreateTaskDTO()
     Description = "This is my first task"
 };
 
-//To create user
-/*var result = await command.CreateUser(createUsercommand);
+/*//To create user
+var result = await command.CreateUser(createUsercommand);
 Console.WriteLine(result.GetType().Name == "String" ? result : $"{result.Name} and {result.Email} \n User has been added");*/
 
 //To Login user
 var loginResult = await command.LoginUser(loginCommand);
-Console.WriteLine(loginResult.GetType().Name == "String" ? loginResult : $"AccessToken: {loginResult.AccessToken}\nRefreshToken: {loginResult.RefreshToken}");
+Console.WriteLine(loginResult.GetType().Name == "String" ? loginResult : $"AccessToken: {loginResult.Data.AccessToken}\nRefreshToken: {loginResult.RefreshToken}");
 
 /*if (loginResult.IsSuccessful)
 {

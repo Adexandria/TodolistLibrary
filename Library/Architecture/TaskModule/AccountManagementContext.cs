@@ -1,5 +1,6 @@
 ﻿using NHibernate;
 using TasksLibrary.Models.Interfaces;
+using TasksLibrary.Services;
 
 namespace TasksLibrary.Architecture.TaskModule
 {
@@ -7,7 +8,7 @@ namespace TasksLibrary.Architecture.TaskModule
     {
         public AccountManagementContext(AccessManagement context,ISession session,
             IUserRepository userRepository,
-            IAuthToken authTokenRepository,
+            AuthTokenRepository authTokenRepository,
             IRefreshTokenRepository refreshTokenRepository,
             IAccessTokenRepository accessTokenRepository ) : base(session)
         {

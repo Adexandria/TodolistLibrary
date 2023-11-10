@@ -12,9 +12,9 @@ namespace TasksLibrary.DB.Mappings
             Map(s => s.Name);
             Map(s => s.PasswordHash);
             Map(s => s.Salt);
-            References(s => s.AccessToken).Cascade.All();
-            References(s => s.RefreshToken).Cascade.All();
-            HasMany(s=>s.Notes).Cascade.Delete();
+            References(s => s.AccessToken).Not.LazyLoad().Cascade.All();
+            References(s => s.RefreshToken).Not.LazyLoad().Cascade.All();
+            HasMany(s=>s.Notes).Not.LazyLoad().Cascade.Delete();
         }
     }
 }
