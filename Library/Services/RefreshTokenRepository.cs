@@ -5,7 +5,7 @@ using TasksLibrary.Models.Interfaces;
 
 namespace TasksLibrary.Services
 {
-    public class RefreshTokenRepository : Repository<RefreshToken>, IRefreshTokenRepository
+    public class RefreshTokenRepository : Repository<IRefreshToken>, IRefreshTokenRepository
     {
         public RefreshTokenRepository(ISession session) : base(session)
         {

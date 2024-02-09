@@ -7,7 +7,5 @@ namespace TasksLibrary.Models.Interfaces
         string GenerateAccessToken(Guid userId,string email);
         string GenerateRefreshToken();
         UserDTO VerifyToken(string token);
-        
-        
     }
 }

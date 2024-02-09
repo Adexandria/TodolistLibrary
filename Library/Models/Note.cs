@@ -2,7 +2,7 @@
 
 namespace TasksLibrary.Models
 {
-    public class Note: BaseClass
+    public class Note: BaseClass,INote
     {
         protected Note()
         {
@@ -21,16 +21,16 @@ namespace TasksLibrary.Models
             Description = description;
         }
 
-        public virtual void SetUser(User user)
+        public virtual void SetUser(IUser user)
         {
-            user.Notes.Add(this);   
-            User = user; 
+            user.Notes.Add(this);
+            user.Id = UserId.Id;
         }
 
         public virtual string Task { get; set; }
         public virtual string Description { get; set; }
         public virtual DateTime Created { get; set; }
         public virtual DateTime Modified { get; set; }
-        public virtual User User { get; set; }
+        public virtual UserId UserId { get; set; }
     }
 }

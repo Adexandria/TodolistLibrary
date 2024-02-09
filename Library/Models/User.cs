@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
+﻿
 
 
 namespace TasksLibrary.Models
 {
-    public class User : BaseClass
+    public class User : BaseClass , IUser
     {
         protected User()
         {
@@ -17,16 +13,14 @@ namespace TasksLibrary.Models
         {
             Name = name;
             Email = email;
+            Notes = new List<INote>();
         }
         public virtual string Name { get; set; }
         public virtual string Email { get; set; }
-        public virtual RefreshToken RefreshToken { get; set; }
-        public virtual AccessToken AccessToken { get; set; }
+        public virtual IRefreshToken RefreshToken { get; set; }
+        public virtual IAccessToken AccessToken { get; set; }
         public virtual string PasswordHash { get; set; }
         public virtual string Salt { get; set; }
-        public virtual IList<Note> Notes { get; set; } = new List<Note>();
-        
-        
-       
+        public virtual IList<INote> Notes { get; set; }
     }
 }

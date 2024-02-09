@@ -3,7 +3,7 @@ using TasksLibrary.Models;
 
 namespace TasksLibrary.DB.Mappings
 {
-    public class ClassMapping<T> : ClassMap<T> where T : BaseClass
+    public class ClassMapping<T> : ClassMap<T> where T : IEntity
     {
         public ClassMapping()
         {

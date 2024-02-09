@@ -1,9 +1,11 @@
 ﻿
 
 
+using TasksLibrary.Models;
+
 namespace TasksLibrary.Services
 {
-    public interface IRepository<T>
+    public interface IRepository<T> where T : IEntity
     {
         Task Add(T entity);
         Task Update(T entity);

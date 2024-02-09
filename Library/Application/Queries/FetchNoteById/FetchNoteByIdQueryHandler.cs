@@ -9,7 +9,7 @@ namespace TasksLibrary.Application.Queries.FetchNoteById
     {
         public override async Task<ActionResult<NoteDTO>> HandleAsync(FetchNoteByIdQuery command)
         {
-            var currentTask = QueryContext.Entities.Where(s => s.Id == command.TaskId && s.User.Id == command.UserId).FirstOrDefault();
+            var currentTask = QueryContext.Entities.Where(s => s.Id == command.TaskId && s.UserId.Id == command.UserId).FirstOrDefault();
 
             if (currentTask == null)
                 return await Task.FromResult(FailedOperation("Note doesn't exist",System.Net.HttpStatusCode.NotFound));

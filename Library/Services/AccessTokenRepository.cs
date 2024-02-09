@@ -10,7 +10,7 @@ using TasksLibrary.DB;
 
 namespace TasksLibrary.Services
 {
-    public class AccessTokenRepository : Repository<AccessToken>, IAccessTokenRepository
+    public class AccessTokenRepository : Repository<IAccessToken>,IAccessTokenRepository
     {
         public AccessTokenRepository(ISession session) : base(session)
         {

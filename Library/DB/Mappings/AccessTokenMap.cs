@@ -2,7 +2,7 @@
 
 namespace TasksLibrary.DB.Mappings
 {
-    public class AccessTokenMap : ClassMapping<AccessToken>
+    public class AccessTokenMap : ClassMapping<IAccessToken>
     {
         public AccessTokenMap()
         {

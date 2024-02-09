@@ -9,6 +9,7 @@ using TasksLibrary.Models;
 using TasksLibrary.Models.Interfaces;
 using TasksLibrary.DB;
 using TasksLibrary.Services;
+using System.Reflection;
 
 namespace TasksLibrary.Architecture.Application
 {
@@ -19,42 +20,11 @@ namespace TasksLibrary.Architecture.Application
             ConnectionString = _connectionString;         
         }
 
-        public void BuildMigration()
-        {
-            using (var service = BuildMigrationRunner())
-            {
-                using (var scope = service.CreateScope())
-                {
-                    var runner = service.GetRequiredService<IMigrationRunner>();
-                    runner.MigrateUp();
-                }
-            }
-        }
-        public ContainerBuilder SetUpDepedencies()
+        public ContainerBuilder SetUpDefaultDepedencies(Assembly assembly = null)
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<UserRepository>()
-                .As<IUserRepository>()
-                .InstancePerLifetimeScope();
-
-            builder.RegisterType<AccessTokenRepository>()
-                .As<IAccessTokenRepository>()
-                .InstancePerLifetimeScope();
-
-            builder.RegisterType<RefreshTokenRepository>()
-                .As<IRefreshTokenRepository>()
-                .InstancePerLifetimeScope();
-
-            builder.RegisterType<AuthTokenRepository>()
-                .As<IAuthToken>()
-                .InstancePerLifetimeScope();
-
-            builder.RegisterType<PasswordManager>()
-                .As<IPasswordManager>()
-                .InstancePerLifetimeScope();
-
-            builder.Register((o) => new SessionFactory(ConnectionString))
+            builder.Register((o) => new SessionFactory(ConnectionString,assembly))
                 .PropertiesAutowired()
                 .SingleInstance();
 
@@ -87,16 +57,12 @@ namespace TasksLibrary.Architecture.Application
             }).As<ISession>().InstancePerLifetimeScope();
 
 
-            builder.RegisterAssemblyTypes(typeof(CreateUserCommandHandler).Assembly)
-                .AsImplementedInterfaces()
-                .PropertiesAutowired()
-                .InstancePerLifetimeScope();
-
             return builder;
         }
 
 
-        private ServiceProvider BuildMigrationRunner()
+
+       /* private ServiceProvider BuildMigrationRunner()
         {
             return new ServiceCollection()
                 .AddFluentMigratorCore()
@@ -105,7 +71,7 @@ namespace TasksLibrary.Architecture.Application
                 .WithGlobalConnectionString(ConnectionString)
                 .ScanIn(typeof(User).Assembly))
                 .BuildServiceProvider(false);
-        }
+        }*/
         public string ConnectionString { get; set; }
     }
 }

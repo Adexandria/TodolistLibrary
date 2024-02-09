@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace TasksLibrary.Models
 {
-    public class BaseClass 
+    public interface IAccessToken : IEntity
     {
-        public virtual Guid Id { get; set; }
+        abstract string Token { get; set; }
+        abstract UserId UserId { get; set; }
     }
 }

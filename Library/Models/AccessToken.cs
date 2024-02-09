@@ -1,6 +1,6 @@
 ﻿namespace TasksLibrary.Models
 {
-    public class AccessToken : BaseClass
+    public class AccessToken : BaseClass, IAccessToken
     {
         public AccessToken()
         {

@@ -7,7 +7,7 @@ using TasksLibrary.Services;
 
 namespace TasksLibrary.Models.Interfaces
 {
-    public interface INoteRepository : IRepository<Note>
+    public interface INoteRepository : IRepository<INote>
     {
     }
 }

@@ -1,9 +1,10 @@
 ﻿using NHibernate;
 using NHibernate.Linq;
+using TasksLibrary.Models;
 
 namespace TasksLibrary.Services
 {
-    public class Repository<T>
+    public class Repository<T> where T: IEntity
     {
         public ISession Session;
         public Repository(ISession session)

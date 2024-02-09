@@ -6,15 +6,15 @@ using TasksLibrary.DB;
 
 namespace TasksLibrary.Services
 {
-    public class UserRepository : Repository<User>, IUserRepository
+    public class UserRepository : Repository<IUser>, IUserRepository
     {
         public UserRepository(ISession session) : base(session)
         {
         }
 
-        public async Task<User> AuthenticateUser(string email, string password)
+        public async Task<IUser> AuthenticateUser(string email, string password)
         {
-            var user = await Session.Query<User>().FirstOrDefaultAsync(x => x.Email == email);
+            var user = await Session.Query<IUser>().FirstOrDefaultAsync(x => x.Email == email);
             if (user != null)
             {
                 var isVerified = PasswordManager.VerifyPassword(password, user.PasswordHash,user.Salt);
@@ -26,15 +26,15 @@ namespace TasksLibrary.Services
             return default;
         }
 
-        public async Task<User> GetExistingUserByEmail(string email)
+        public async Task<IUser> GetExistingUserByEmail(string email)
         {
-            var user = await Session.Query<User>().FirstOrDefaultAsync(s => s.Email == email);
+            var user = await Session.Query<IUser>().FirstOrDefaultAsync(s => s.Email == email);
             return user;
         }
 
         public async Task<bool> IsExist(string email)
         {
-            var user = await Session.Query<User>().FirstOrDefaultAsync(s => s.Email == email);
+            var user = await Session.Query<IUser>().FirstOrDefaultAsync(s => s.Email == email);
             return user != null;
         }
 

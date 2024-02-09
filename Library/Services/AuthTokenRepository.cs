@@ -7,9 +7,9 @@ using TasksLibrary.Models.Interfaces;
 
 namespace TasksLibrary.Services
 {
-    public class AuthTokenRepository :IAuthToken
+    public class AuthTokenRepository :AuthService
     {
-        public string GenerateAccessToken(Guid userId, string email)
+        public override string GenerateAccessToken(Guid userId, string email)
         {
             var securityTokenDescriptor = new SecurityTokenDescriptor
             {
@@ -29,7 +29,7 @@ namespace TasksLibrary.Services
             return token;
         }
 
-        public string GenerateRefreshToken()
+        public override string GenerateRefreshToken()
         {
             var randomNumber = new byte[32];
             using var rng = RandomNumberGenerator.Create();
@@ -38,7 +38,7 @@ namespace TasksLibrary.Services
             return refreshtoken;
         }
 
-        public UserDTO VerifyToken(string token)
+        public override UserDTO VerifyToken(string token)
         {
             TokenValidationParameters tokenValidationParameters = GetTokenValidationParameters();
 

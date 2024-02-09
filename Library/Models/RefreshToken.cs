@@ -1,6 +1,6 @@
 ﻿namespace TasksLibrary.Models
 {
-    public class RefreshToken : BaseClass
+    public class RefreshToken : BaseClass, IRefreshToken
     {
         protected RefreshToken()
         {

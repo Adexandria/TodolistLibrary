@@ -2,7 +2,7 @@
 
 namespace TasksLibrary.DB.Mappings
 {
-    public class UserMap : ClassMapping<User>
+    public class UserMap : ClassMapping<IUser>
     {
         public UserMap()
         {

@@ -2,11 +2,11 @@
 
 namespace TasksLibrary.Models.Interfaces
 {
-    public interface IUserRepository : IRepository<User>
+    public interface IUserRepository : IRepository<IUser>
     {
-        Task<User> GetExistingUserByEmail(string email);
+        Task<IUser> GetExistingUserByEmail(string email);
         Task<bool> IsExist(string email);
-        Task<User> AuthenticateUser(string email, string password);
+        Task<IUser> AuthenticateUser(string email, string password);
 
     }
 }

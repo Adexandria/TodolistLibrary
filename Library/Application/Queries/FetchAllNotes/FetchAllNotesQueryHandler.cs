@@ -8,7 +8,7 @@ namespace TasksLibrary.Application.Queries.FetchAllNotes
     {
         public override async Task<ActionResult<List<NoteDTO>>> HandleAsync(FetchAllNotesQuery command)
         {
-            var currentNotes = QueryContext.Entities.Where(s=>s.User.Id == command.UserId).OrderByDescending(s => s.Created).ToList();
+            var currentNotes = QueryContext.Entities.Where(s=>s.UserId.Id == command.UserId).OrderByDescending(s => s.Created).ToList();
 
             if (!currentNotes.Any())
             {

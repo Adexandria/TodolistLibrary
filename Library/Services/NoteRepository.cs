@@ -4,7 +4,7 @@ using TasksLibrary.Models.Interfaces;
 
 namespace TasksLibrary.Services
 {
-    public class NoteRepository : Repository<Note>, INoteRepository
+    public class NoteRepository : Repository<INote>, INoteRepository
     {
         public NoteRepository(ISession session) : base(session)
         {

@@ -8,7 +8,7 @@ using TasksLibrary.Models;
 
 namespace TasksLibrary.DB.Mappings
 {
-    public class RefreshTokenMap : ClassMapping<RefreshToken>
+    public class RefreshTokenMap : ClassMapping<IRefreshToken>
     {
         public RefreshTokenMap()
         {

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace TasksLibrary.Models
 {
-    public class BaseClass 
+    public interface IEntity
     {
-        public virtual Guid Id { get; set; }
+        abstract Guid Id { get; set; }
     }
 }
