@@ -3,11 +3,18 @@ using TasksLibrary.Application.Commands.Login;
 using TasksLibrary.Application.Commands.UpdateTask;
 using TasksLibrary.Client;
 using TasksLibrary.Architecture.Application;
+using TasksLibrary.DB.Mappings;
+using TasksLibrary.Architecture.Extensions;
+using System.Reflection;
+using FluentNHibernate.Mapping;
+using FluentNHibernate.Cfg;
 
 var containerBuilder = new TaskContainerBuilder("Data Source=(localdb)\\MSSQLLocalDB;Database=TodoList;Integrated Security=True;Connect Timeout=30;");
 
-containerBuilder.BuildMigration();
-var container = containerBuilder.SetUpDepedencies().Build();
+/*containerBuilder.BuildMigration();*/
+
+var container = containerBuilder.SetUpDefaultDepedencies(Assembly.GetExecutingAssembly())
+    .UseDefaultDependencies().Build();
 
 ITaskApplication application = new TaskApplication();
 
@@ -48,7 +55,7 @@ Console.WriteLine(result.GetType().Name == "String" ? result : $"{result.Name} a
 //To Login user
 var loginResult = await command.LoginUser(loginCommand);
 Console.WriteLine(loginResult.GetType().Name == "String" ? loginResult : $"AccessToken: {loginResult.AccessToken}\nRefreshToken: {loginResult.RefreshToken}");
-
+ 
 if (loginResult.IsSuccessful)
 {
 
