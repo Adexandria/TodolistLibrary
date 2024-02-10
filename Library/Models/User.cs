@@ -5,22 +5,22 @@ namespace TasksLibrary.Models
 {
     public class User : BaseClass , IUser
     {
-        protected User()
+        public User()
         {
 
         }
-        public User(string name,string email)
+        public User(string firstName, string lastName,string email)
         {
-            Name = name;
+            FirstName = firstName;
+            LastName = lastName;
             Email = email;
-            Notes = new List<INote>();
         }
-        public virtual string Name { get; set; }
+        public virtual string FirstName { get; set; }
+        public virtual string LastName { get; set; }
         public virtual string Email { get; set; }
         public virtual IRefreshToken RefreshToken { get; set; }
         public virtual IAccessToken AccessToken { get; set; }
         public virtual string PasswordHash { get; set; }
         public virtual string Salt { get; set; }
-        public virtual IList<INote> Notes { get; set; }
     }
 }

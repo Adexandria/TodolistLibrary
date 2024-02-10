@@ -19,8 +19,6 @@ namespace TasksLibrary.Application.Commands.CreateTask
             if (!string.IsNullOrEmpty(command.Description))
                     newNote.SetDescription(command.Description);
 
-            newNote.SetUser(currentUser);
-
             await Dbcontext.Context.NoteRepository.Add(newNote);
 
             var commitStatus = await Dbcontext.CommitAsync();

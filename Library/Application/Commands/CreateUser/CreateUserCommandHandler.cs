@@ -4,6 +4,10 @@ using TasksLibrary.Utilities;
 using TasksLibrary.Models;
 using TasksLibrary.Models.Interfaces;
 using TasksLibrary.Services;
+using Automappify.Services;
+using System.Reflection;
+using FluentNHibernate.Mapping;
+using TasksLibrary.Architecture.Extensions;
 
 namespace TasksLibrary.Application.Commands.CreateUser
 {
@@ -17,19 +21,22 @@ namespace TasksLibrary.Application.Commands.CreateUser
                 return FailedOperation("This email already exists", HttpStatusCode.BadRequest);
             }
 
-            var newUser = new User(command.Name, command.Email);
-            var hashedPassword = PasswordManager.HashPassword(command.Password, out var salt);
-            newUser.Salt = salt;
+            var hashedPassword = PasswordManager.HashPassword(command.Password, out string salt);
+
+            IUser newUser = command.MapToEntity<CreateUserCommand, IUser>();
+
             newUser.PasswordHash = hashedPassword;
+            newUser.Salt = salt;
 
             await Dbcontext.Context.UserRepository.Add(newUser);
+
             var commitStatus = await Dbcontext.CommitAsync();
             if (commitStatus.NotSuccessful)
                 return FailedOperation("Couldn't create new user");
 
             var createdUser = new CreateUserDTO()
             {
-                Name = newUser.Name,
+                Name = $"{newUser.FirstName} {newUser.LastName}",
                 Email = newUser.Email
             };
             return SuccessfulOperation(createdUser);

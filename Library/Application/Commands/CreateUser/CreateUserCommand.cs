@@ -8,16 +8,18 @@ namespace TasksLibrary.Application.Commands.CreateUser
         public override ActionResult Validate()
         {
             return new RequestValidator().IsEmail(Email, "Invalid email")
-                .IsText(Name, "Invalid name")
+                .IsText(FirstName, "Invalid name")
+                .IsText(LastName, "Invalid name")
                 .IsText(Password, "Invalid password")
                 .Result;
         }
 
 
-        public string Name { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        [Compare("Password", ErrorMessage = "Password and confirm Password not question")]
+        [Compare("Password", ErrorMessage = "Password and confirm Password not equal")]
         public string ConfirmPassword { get; set; }
     }
 }

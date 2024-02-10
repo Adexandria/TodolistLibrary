@@ -37,7 +37,7 @@ namespace TasksLibrary.Application.Commands.Login
             var loginDTO = new LoginDTO()
             {
                 Email = authenticatedUser.Email,
-                Name = authenticatedUser.Name,
+                Name = $"{authenticatedUser.FirstName} {authenticatedUser.LastName}",
                 AccessToken = accessToken,
                 RefreshToken = refreshToken
             };

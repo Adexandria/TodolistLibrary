@@ -41,14 +41,14 @@ namespace TasksLibrary.DB
                 .Driver<ProfiledDriver<SqlClientDriver>>())
                 .Cache(c=> 
                 {
-                    c.UseQueryCache().UseSecondLevelCache().ProviderClass("NHibernate.Cache.HashtableCacheProvider, NHibernate");
-                    c.UseMinimalPuts();
+                   /* c.UseQueryCache().UseSecondLevelCache().ProviderClass("NHibernate.Cache.HashtableCacheProvider, NHibernate");
+                    c.UseMinimalPuts();*/
                 }
                 )
                 .ExposeConfiguration(cfg =>
                 {
                     new SchemaExport(cfg).Create(true, true);
-                   cfg.SetProperty("generate_statistics", "true");
+                   //cfg.SetProperty("generate_statistics", "true");
                 });
               AddMappings(configuration);
             return configuration.BuildSessionFactory();
