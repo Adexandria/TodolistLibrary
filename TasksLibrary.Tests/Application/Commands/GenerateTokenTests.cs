@@ -45,7 +45,7 @@ namespace TasksLibrary.Tests.Application.Commands
             var user = new UserId(Guid.NewGuid());
             DbContext.Setup(s => s.Context.RefreshTokenRepository.GetUserByRefreshToken(Command.RefreshToken))
                 .ReturnsAsync(user);
-            DbContext.Setup(s => s.Context.UserRepository.GetExistingEntityById(It.IsAny<Guid>())).ReturnsAsync(new User("ade", "ade"));
+            DbContext.Setup(s => s.Context.UserRepository.GetExistingEntityById(It.IsAny<Guid>())).ReturnsAsync(new User("ade","ade", "ade"));
 
             DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateAccessToken(It.IsAny<Guid>(), It.IsAny<string>())).Returns("accessToken");
 

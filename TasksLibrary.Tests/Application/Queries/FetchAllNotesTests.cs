@@ -27,7 +27,6 @@ namespace TasksLibrary.Tests.Application.Queries
         {
             //Arrange
             var note = new Note("Get it done");
-            note.SetUser(new User("Adeola", "Adeolaaderibigbe@gmail.com"));
             Entities.Setup(s => s.Entities).Returns(new[] { note }.AsQueryable());
 
             //Act

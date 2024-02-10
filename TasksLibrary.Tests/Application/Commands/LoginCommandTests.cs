@@ -44,7 +44,7 @@ namespace TasksLibrary.Tests.Application.Commands
         public async Task ShouldFailToAuthicateUserIfCommitFails()
         {
             //Arrange
-            var user = new User("ade", "ade");
+            var user = new User("ade", "adee","ade");
             user.Id = Guid.NewGuid();
             user.AccessToken = new AccessToken("accessToken", new UserId(user.Id));
             user.RefreshToken = new RefreshToken("refreshToken", DateTime.Now.AddDays(3), new UserId(user.Id));
@@ -70,7 +70,7 @@ namespace TasksLibrary.Tests.Application.Commands
         public async Task ShouldAuthicateUserSuccessfully()
         {
             //Arrange
-            var user = new User("ade", "ade");
+            var user = new User("ade","ade", "ade");
             user.Id = Guid.NewGuid();
             user.AccessToken = new AccessToken("accessToken", new UserId(user.Id));
             user.RefreshToken = new RefreshToken("refreshToken", DateTime.Now.AddDays(3), new UserId(user.Id));
@@ -95,7 +95,7 @@ namespace TasksLibrary.Tests.Application.Commands
         public async Task ShouldAuthicateUserSuccessfullyIfFirstTimeLogin()
         {
             //Arrange
-            var user = new User("ade", "ade");
+            var user = new User("ade", "ade","ade");
             user.Id = Guid.NewGuid();
             DbContext.Setup(s => s.Context.UserRepository.AuthenticateUser(Command.Email, Command.Password)).ReturnsAsync(user);
             DbContext.Setup(s => s.Context.UserRepository.Update(It.IsAny<User>()));

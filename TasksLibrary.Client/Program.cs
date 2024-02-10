@@ -27,7 +27,8 @@ var createUsercommand = new CreateUserCommand()
     Password = "1234",
     ConfirmPassword = "1234",
     Email = "adeolaaderibigbe09@gmail.com",
-    Name = "Adeola Aderibigbe"
+    FirstName = "Adeola" ,
+    LastName = "Aderibigbe"
 };
 
 var loginCommand = new LoginCommand()
@@ -48,26 +49,26 @@ var dto = new CreateTaskDTO()
     Description = "This is my first task"
 };
 
-/*//To create user
+//To create user
 var result = await command.CreateUser(createUsercommand);
-Console.WriteLine(result.GetType().Name == "String" ? result : $"{result.Name} and {result.Email} \n User has been added");*/
+Console.WriteLine(result.GetType().Name == "String" ? result : $"{result.Name} and {result.Email} \n User has been added");
 
 //To Login user
-var loginResult = await command.LoginUser(loginCommand);
+/*var loginResult = await command.LoginUser(loginCommand);
 Console.WriteLine(loginResult.GetType().Name == "String" ? loginResult : $"AccessToken: {loginResult.AccessToken}\nRefreshToken: {loginResult.RefreshToken}");
  
 if (loginResult.IsSuccessful)
 {
 
     //Create a new to-do list
-    /*
+    *//*
      * 
       var result = await command.CreateTask(dto, loginResult.AccessToken);
-      Console.WriteLine(result.GetType().Name == "String" ? $"Error: {result}" : $"TaskId: {result} created successfully");*/
+      Console.WriteLine(result.GetType().Name == "String" ? $"Error: {result}" : $"TaskId: {result} created successfully");*//*
 
     //Update to-do list
     
-   /* var updatedResult = await command.UpdateTask(UpdatedCommand, loginResult.AccessToken);
+   *//* var updatedResult = await command.UpdateTask(UpdatedCommand, loginResult.AccessToken);
     Console.WriteLine(updatedResult.GetType().Name == "String" ? updatedResult : "Updated successfully");
 
     // Get all to-do lists
@@ -91,6 +92,6 @@ if (loginResult.IsSuccessful)
 
     //Delete list
     var deletedResult = await command.DeleteTask(new Guid("ce0e4999-c9ca-4ebc-8cd9-b00d00d92bd5"), loginResult.AccessToken);
-    Console.WriteLine(deletedResult.GetType().Name == "String" ? deletedResult : "Deleted successfully");*/
-}
+    Console.WriteLine(deletedResult.GetType().Name == "String" ? deletedResult : "Deleted successfully");*//*
+}*/
 

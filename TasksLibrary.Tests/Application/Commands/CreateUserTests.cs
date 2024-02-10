@@ -88,7 +88,7 @@ namespace TasksLibrary.Tests.Application.Commands
                 Email = "aderibigbe.adeola@gmail.com",
                 Password = "Adeola5real",
                 ConfirmPassword = "Adeola5real",
-                Name = "Adeola"
+                FirstName = "Adeola"
             };
         }
         private IPasswordManager PasswordManager { get; set; }

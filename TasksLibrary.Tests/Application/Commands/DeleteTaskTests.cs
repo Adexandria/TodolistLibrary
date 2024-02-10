@@ -29,7 +29,6 @@ namespace TasksLibrary.Tests.Application.Commands
         {
             //Arrange
             var note = new Note("Get it done");
-            note.SetUser(new User("Adeola", "Adeolaaderibigbe@gmail.com"));
             DbContext.Setup(s => s.Context.NoteRepository.GetExistingEntityById(new Guid())).ReturnsAsync(note);
             DbContext.AssumeCommitFails();
             //Act
@@ -46,7 +45,6 @@ namespace TasksLibrary.Tests.Application.Commands
         {
             //Arrange
             var note = new Note("Get it done");
-            note.SetUser(new User("Adeola", "Adeolaaderibigbe@gmail.com"));
             DbContext.Setup(s => s.Context.NoteRepository.GetExistingEntityById(new Guid())).ReturnsAsync(note);
             DbContext.AssumeCommitSuccessfully();
 

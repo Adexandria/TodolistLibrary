@@ -1,4 +1,5 @@
 ﻿using Moq;
+using System.Xml.Linq;
 using TasksLibrary.Application.Commands.CreateTask;
 using TasksLibrary.Architecture.Database;
 using TasksLibrary.Models;
@@ -32,7 +33,7 @@ namespace TasksLibrary.Tests.Application.Commands
         {
             //Arrange
             DbContext.Setup(s => s.Context.UserRepository.GetExistingEntityById(Command.UserId))
-                .ReturnsAsync(new User("Name", "adeolaaderibigbe09@gmail.com"));
+                .ReturnsAsync(new User("Name", "Name", "adeolaaderibigbe09@gmail.com"));
 
             DbContext.Setup(s => s.Context.NoteRepository.Add(It.IsAny<Note>()));
 
@@ -51,7 +52,7 @@ namespace TasksLibrary.Tests.Application.Commands
         {
             //Arrange
             DbContext.Setup(s => s.Context.UserRepository.GetExistingEntityById(Command.UserId))
-                .ReturnsAsync(new User("Name", "adeolaaderibigbe09@gmail.com"));
+                .ReturnsAsync(new User("Name", "Name", "adeolaaderibigbe09@gmail.com"));
 
             DbContext.Setup(s => s.Context.NoteRepository.Add(It.IsAny<Note>()));
 
@@ -82,7 +83,7 @@ namespace TasksLibrary.Tests.Application.Commands
         {
             //Arrange
             DbContext.Setup(s => s.Context.UserRepository.GetExistingEntityById(Command.UserId))
-                .ReturnsAsync(new User("Name", "adeolaaderibigbe09@gmail.com"));
+               .ReturnsAsync(new User("Name", "Name", "adeolaaderibigbe09@gmail.com"));
 
             DbContext.Setup(s => s.Context.NoteRepository.Add(It.IsAny<Note>()));
 

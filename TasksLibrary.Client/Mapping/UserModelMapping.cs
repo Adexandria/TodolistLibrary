@@ -18,13 +18,13 @@ namespace TasksLibrary.Client.Mapping
             Table("Users");
             Id(s=>s.Id);
             Map(s => s.Email);
-            Map(s => s.Name);
+            Map(s => s.FirstName);
+            Map(s => s.LastName);
             Map(s => s.PasswordHash);
             Map(s => s.Salt);
             Map(s => s.AuthenticationType);
             References(s => s.AccessToken).Cascade.All();
             References(s => s.RefreshToken).Cascade.All();
-            HasMany(s => s.Notes).Table("Notes").Cascade.Delete();
         }
     }
 }
