@@ -2,6 +2,7 @@
 using TasksLibrary.Models.Interfaces;
 using TasksLibrary.Architecture.Database;
 using TasksLibrary.Services;
+using System.Security.Claims;
 
 namespace TasksLibrary.Application.Commands.VerifyToken
 {
@@ -9,10 +10,14 @@ namespace TasksLibrary.Application.Commands.VerifyToken
     {
         public override async Task<ActionResult<UserDTO>> HandleCommand(VerifyTokenCommand command)
         {
-            var user = Dbcontext.Context.AuthenTokenRepository.VerifyToken(command.AccessToken);
+            var userClaims = Dbcontext.Context.AuthenTokenRepository.VerifyToken(command.AccessToken);
 
-            if (user == null)
+            if (userClaims == null)
                 return await Task.FromResult(FailedOperation("Invalid token", System.Net.HttpStatusCode.Unauthorized));
+
+
+            var user = new UserDTO(userClaims.FindFirst("id").Value, userClaims.FindFirst(ClaimTypes.Email).Value);
+
 
             return await Task.FromResult(SuccessfulOperation(user));
         }

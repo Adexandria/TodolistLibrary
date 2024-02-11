@@ -1,4 +1,6 @@
-﻿using TasksLibrary.Application.Commands.VerifyToken;
+﻿using Moq;
+using System.Security.Claims;
+using TasksLibrary.Application.Commands.VerifyToken;
 using TasksLibrary.Architecture.Database;
 using TasksLibrary.Models.Interfaces;
 using TasksLibrary.Services;
@@ -41,7 +43,7 @@ namespace TasksLibrary.Tests.Application.Commands
         public async Task ShoulVerifyTokenSuccessfully()
         {
             //Arrange
-            DbContext.Setup(s => s.Context.AuthenTokenRepository.VerifyToken(Command.AccessToken)).Returns(new UserDTO("00000000-0000-0000-0000-000000000000","email"));
+            DbContext.Setup(s => s.Context.AuthenTokenRepository.VerifyToken(Command.AccessToken)).Returns(It.IsAny<ClaimsPrincipal>());
 
             //Act
             var response = await Handler.HandleCommand(Command);

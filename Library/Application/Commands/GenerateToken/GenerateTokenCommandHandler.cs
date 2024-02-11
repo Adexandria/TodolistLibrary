@@ -1,6 +1,7 @@
 ﻿using TasksLibrary.Utilities;
 using TasksLibrary.Models.Interfaces;
 using TasksLibrary.Architecture.Database;
+using System.Security.Claims;
 
 namespace TasksLibrary.Application.Commands.GenerateToken
 {
@@ -18,7 +19,14 @@ namespace TasksLibrary.Application.Commands.GenerateToken
             if (user == null)
                 return FailedOperation("Invalid user",System.Net.HttpStatusCode.NotFound);
 
-            var accessToken = Dbcontext.Context.AuthenTokenRepository.GenerateAccessToken(user.Id,user.Email);
+            var claims = new Dictionary<string, object>
+            {
+                { "id", user.Id.ToString("N") },
+
+                { ClaimTypes.Email, user.Email }
+            };
+
+            var accessToken = Dbcontext.Context.AuthenTokenRepository.GenerateAccessToken(claims);
 
             return SuccessfulOperation(accessToken);
         }

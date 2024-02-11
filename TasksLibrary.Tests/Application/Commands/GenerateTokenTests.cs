@@ -47,7 +47,7 @@ namespace TasksLibrary.Tests.Application.Commands
                 .ReturnsAsync(user);
             DbContext.Setup(s => s.Context.UserRepository.GetExistingEntityById(It.IsAny<Guid>())).ReturnsAsync(new User("ade","ade", "ade"));
 
-            DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateAccessToken(It.IsAny<Guid>(), It.IsAny<string>())).Returns("accessToken");
+            DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateAccessToken(It.IsAny<Dictionary<string,object>>(),It.IsAny<int>())).Returns("accessToken");
 
             //Act
             var response = await Handler.HandleCommand(Command);

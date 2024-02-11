@@ -2,6 +2,7 @@
 using TasksLibrary.Utilities;
 using TasksLibrary.Models;
 using TasksLibrary.Models.Interfaces;
+using TasksLibrary.Architecture.Extensions;
 
 namespace TasksLibrary.Application.Commands.CreateTask
 {
@@ -14,10 +15,10 @@ namespace TasksLibrary.Application.Commands.CreateTask
             if (currentUser == null)
                 return FailedOperation("User doesn't exist",System.Net.HttpStatusCode.NotFound);
 
-            var newNote = new Note(command.Task);
+            var newNote = command.MapToEntity<CreateTaskCommand,INote>();
 
             if (!string.IsNullOrEmpty(command.Description))
-                    newNote.SetDescription(command.Description);
+                    newNote.Description = command.Description;
 
             await Dbcontext.Context.NoteRepository.Add(newNote);
 

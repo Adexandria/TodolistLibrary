@@ -3,6 +3,7 @@ using TasksLibrary.Utilities;
 using TasksLibrary.Models;
 using TasksLibrary.Models.Interfaces;
 using TasksLibrary.Architecture.Database;
+using System.Security.Claims;
 
 namespace TasksLibrary.Application.Commands.Login
 {
@@ -23,7 +24,15 @@ namespace TasksLibrary.Application.Commands.Login
                await Dbcontext.Context.AccessTokenRepository.Delete(authenticatedUser.AccessToken);
             }
 
-            string accessToken =  Dbcontext.Context.AuthenTokenRepository.GenerateAccessToken(authenticatedUser.Id,authenticatedUser.Email);
+
+            var claims = new Dictionary<string, object>
+            {
+                { "id", authenticatedUser.Id.ToString("N") },
+
+                { ClaimTypes.Email, authenticatedUser.Email }
+            };
+
+            string accessToken =  Dbcontext.Context.AuthenTokenRepository.GenerateAccessToken(claims);
             string refreshToken = Dbcontext.Context.AuthenTokenRepository.GenerateRefreshToken();
 
             var accessTokenModel = new AccessToken(accessToken, new UserId(authenticatedUser.Id));

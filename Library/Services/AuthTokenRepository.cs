@@ -7,18 +7,22 @@ using TasksLibrary.Models.Interfaces;
 
 namespace TasksLibrary.Services
 {
-    public class AuthTokenRepository :AuthService
+    public class AuthTokenRepository : AuthService
     {
-        public override string GenerateAccessToken(Guid userId, string email)
+        public AuthTokenRepository(string encryptionKey = null)
+        {
+            _encryptionKey = encryptionKey ?? "SecretKeyTaskApplication@1345";
+        }
+
+        public override string TokenEncryptionKey => _encryptionKey 
+            ?? throw new NullReferenceException("Token encryption key can't be null");
+
+        public override string GenerateAccessToken(Dictionary<string, object> claims,int timeInMinutes)
         {
             var securityTokenDescriptor = new SecurityTokenDescriptor
             {
-                Claims = new Dictionary<string, object>()
-                {
-                    { "id", userId.ToString("N") },
-                    { ClaimTypes.Email,email }
-                },
-                Expires = DateTime.UtcNow.AddMinutes(5),
+                Claims = claims,
+                Expires = DateTime.UtcNow.AddMinutes(timeInMinutes),
                 SigningCredentials = new SigningCredentials(GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256Signature)
             };
 
@@ -29,16 +33,18 @@ namespace TasksLibrary.Services
             return token;
         }
 
-        public override string GenerateRefreshToken()
+        public override string GenerateRefreshToken(int tokenSize)
         {
-            var randomNumber = new byte[32];
+            var randomNumber = new byte[tokenSize];
+
             using var rng = RandomNumberGenerator.Create();
             rng.GetBytes(randomNumber);
+
             var refreshtoken = Convert.ToBase64String(randomNumber);
             return refreshtoken;
         }
 
-        public override UserDTO VerifyToken(string token)
+        public override ClaimsPrincipal VerifyToken(string token)
         {
             TokenValidationParameters tokenValidationParameters = GetTokenValidationParameters();
 
@@ -46,22 +52,17 @@ namespace TasksLibrary.Services
             try
             {
                 var claims = jwtSecurityTokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken validatedToken);
-                var userId = claims.FindFirst("id").Value;
-                var email = claims.FindFirst(ClaimTypes.Email).Value;
-
-                var userDto = new UserDTO(userId, email);
-                return userDto;
+                return claims;
             }
             catch(Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return default;
+                throw new Exception(ex.Message, ex);
             }
         }
         
         private SecurityKey GetSymmetricSecurityKey()
         {
-            byte[] symmetricKey = Encoding.UTF8.GetBytes("SecretKeyTaskApplication@1345");
+            byte[] symmetricKey = Encoding.UTF8.GetBytes(TokenEncryptionKey);
             return new SymmetricSecurityKey(symmetricKey);
         }
 
@@ -74,5 +75,7 @@ namespace TasksLibrary.Services
                 IssuerSigningKey = GetSymmetricSecurityKey()
             };
         }
+
+        private readonly string _encryptionKey;
     }
 }

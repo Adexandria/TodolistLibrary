@@ -1,4 +1,5 @@
 ﻿
+using Automapify.Services.Attributes;
 using TasksLibrary.Utilities;
 
 namespace TasksLibrary.Application.Commands.CreateTask
@@ -14,8 +15,8 @@ namespace TasksLibrary.Application.Commands.CreateTask
         }
 
         public string Task { get; set; }
+        [Ignore]
         public string Description { get; set; }
         public Guid UserId { get; set; }
-
     }
 }

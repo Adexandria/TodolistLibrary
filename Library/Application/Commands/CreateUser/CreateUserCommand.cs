@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Automapify.Services.Attributes;
+using System.ComponentModel.DataAnnotations;
 using TasksLibrary.Utilities;
 
 namespace TasksLibrary.Application.Commands.CreateUser
@@ -18,7 +19,11 @@ namespace TasksLibrary.Application.Commands.CreateUser
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+
+        [Ignore]
         public string Password { get; set; }
+
+        [Ignore]
         [Compare("Password", ErrorMessage = "Password and confirm Password not equal")]
         public string ConfirmPassword { get; set; }
     }

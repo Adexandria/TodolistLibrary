@@ -1,4 +1,5 @@
 ﻿using Moq;
+using System.Security.Claims;
 using TasksLibrary.Application.Commands.Login;
 using TasksLibrary.Architecture.Database;
 using TasksLibrary.Models;
@@ -45,6 +46,8 @@ namespace TasksLibrary.Tests.Application.Commands
         {
             //Arrange
             var user = new User("ade", "adee","ade");
+
+            var claims = new Dictionary<string, object>() { { "id", user.Id } };
             user.Id = Guid.NewGuid();
             user.AccessToken = new AccessToken("accessToken", new UserId(user.Id));
             user.RefreshToken = new RefreshToken("refreshToken", DateTime.Now.AddDays(3), new UserId(user.Id));
@@ -52,8 +55,8 @@ namespace TasksLibrary.Tests.Application.Commands
             DbContext.Setup(s => s.Context.RefreshTokenRepository.Delete(It.IsAny<RefreshToken>()));
             DbContext.Setup(s => s.Context.AccessTokenRepository.Delete(It.IsAny<AccessToken>()));
             DbContext.Setup(s => s.Context.UserRepository.Update(It.IsAny<User>()));
-            DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateRefreshToken()).Returns("refreshToken");
-            DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateAccessToken(user.Id,user.Email)).Returns("accessToken");
+            DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateRefreshToken(32)).Returns("refreshToken");
+            DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateAccessToken(claims,30)).Returns("accessToken");
             DbContext.AssumeCommitFails();
 
             //Act
@@ -72,14 +75,15 @@ namespace TasksLibrary.Tests.Application.Commands
             //Arrange
             var user = new User("ade","ade", "ade");
             user.Id = Guid.NewGuid();
+            var claims = new Dictionary<string, object>() { { "id", user.Id } };
             user.AccessToken = new AccessToken("accessToken", new UserId(user.Id));
             user.RefreshToken = new RefreshToken("refreshToken", DateTime.Now.AddDays(3), new UserId(user.Id));
             DbContext.Setup(s => s.Context.UserRepository.AuthenticateUser(Command.Email, Command.Password)).ReturnsAsync(user);
             DbContext.Setup(s => s.Context.RefreshTokenRepository.Delete(It.IsAny<RefreshToken>()));
             DbContext.Setup(s => s.Context.AccessTokenRepository.Delete(It.IsAny<AccessToken>()));
             DbContext.Setup(s => s.Context.UserRepository.Update(It.IsAny<User>()));
-            DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateRefreshToken()).Returns("refreshToken");
-            DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateAccessToken(user.Id, user.Email)).Returns("accessToken");
+            DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateRefreshToken(32)).Returns("refreshToken");
+            DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateAccessToken(claims, 30)).Returns("accessToken");
             DbContext.AssumeCommitSuccessfully();
 
             //Act
@@ -97,11 +101,12 @@ namespace TasksLibrary.Tests.Application.Commands
             //Arrange
             var user = new User("ade", "ade","ade");
             user.Id = Guid.NewGuid();
+            var claims = new Dictionary<string, object>() { { "id", user.Id } };
             DbContext.Setup(s => s.Context.UserRepository.AuthenticateUser(Command.Email, Command.Password)).ReturnsAsync(user);
             DbContext.Setup(s => s.Context.UserRepository.Update(It.IsAny<User>()));
             DbContext.AssumeCommitSuccessfully();
-            DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateRefreshToken()).Returns("refreshToken");
-            DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateAccessToken(user.Id, user.Email)).Returns("accessToken");
+            DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateRefreshToken(32)).Returns("refreshToken");
+            DbContext.Setup(s => s.Context.AuthenTokenRepository.GenerateAccessToken(claims, 30)).Returns("accessToken");
 
             //Act
             var response = await Handler.HandleCommand(Command);
