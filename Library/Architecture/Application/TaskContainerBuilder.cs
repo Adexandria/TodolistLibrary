@@ -10,6 +10,8 @@ using TasksLibrary.Models.Interfaces;
 using TasksLibrary.DB;
 using TasksLibrary.Services;
 using System.Reflection;
+using TasksLibrary.Architecture.Extensions;
+using TasksLibrary.Utilities;
 
 namespace TasksLibrary.Architecture.Application
 {
@@ -20,11 +22,11 @@ namespace TasksLibrary.Architecture.Application
             ConnectionString = _connectionString;         
         }
 
-        public ContainerBuilder SetUpDefaultDepedencies(Assembly assembly = null)
+        public ContainerBuilder RegisterDependencies(bool useDefaultConfiguration = true, params string[] assemblies)
         {
             var builder = new ContainerBuilder();
 
-            builder.Register((o) => new SessionFactory(ConnectionString,assembly))
+            builder.Register((o) => new SessionFactory(ConnectionString,assemblies))
                 .PropertiesAutowired()
                 .SingleInstance();
 
@@ -56,6 +58,15 @@ namespace TasksLibrary.Architecture.Application
                 return factoryInstance.Session;
             }).As<ISession>().InstancePerLifetimeScope();
 
+
+            if (!useDefaultConfiguration && assemblies.Length > 0)
+            {
+                builder.UseCustomDependencies(assemblies); 
+            }
+            else
+            {
+                builder.UseDefaultDependencies();
+            }
 
             return builder;
         }

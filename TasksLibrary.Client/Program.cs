@@ -13,8 +13,8 @@ var containerBuilder = new TaskContainerBuilder("Data Source=(localdb)\\MSSQLLoc
 
 /*containerBuilder.BuildMigration();*/
 
-var container = containerBuilder.SetUpDefaultDepedencies(Assembly.GetExecutingAssembly())
-    .UseDefaultDependencies().Build();
+var container = containerBuilder
+    .RegisterDependencies(false,Assembly.GetExecutingAssembly().FullName).Build();
 
 ITaskApplication application = new TaskApplication();
 

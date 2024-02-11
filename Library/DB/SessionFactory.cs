@@ -19,9 +19,9 @@ namespace TasksLibrary.DB
                 _sessionFactory = BuildSessionFactory(_connectionString);
         }
 
-        public SessionFactory(string _connectionString, Assembly assembly)
+        public SessionFactory(string _connectionString, string[] assemblies)
         {
-            mappingAssembly = assembly ?? typeof(UserMap).Assembly;
+            _assemblies = assemblies;
             if (_sessionFactory is null || !string.IsNullOrEmpty(_connectionString))
                 _sessionFactory = BuildSessionFactory(_connectionString);  
         }
@@ -41,14 +41,14 @@ namespace TasksLibrary.DB
                 .Driver<ProfiledDriver<SqlClientDriver>>())
                 .Cache(c=> 
                 {
-                   /* c.UseQueryCache().UseSecondLevelCache().ProviderClass("NHibernate.Cache.HashtableCacheProvider, NHibernate");
-                    c.UseMinimalPuts();*/
+                    c.UseQueryCache().UseSecondLevelCache().ProviderClass("NHibernate.Cache.HashtableCacheProvider, NHibernate");
+                    c.UseMinimalPuts();
                 }
                 )
                 .ExposeConfiguration(cfg =>
                 {
                     new SchemaExport(cfg).Create(true, true);
-                   //cfg.SetProperty("generate_statistics", "true");
+                   cfg.SetProperty("generate_statistics", "true");
                 });
               AddMappings(configuration);
             return configuration.BuildSessionFactory();
@@ -56,21 +56,21 @@ namespace TasksLibrary.DB
 
         private void AddMappings(FluentConfiguration configuration)
         {
-            if (mappingAssembly == typeof(UserMap).Assembly)
+            if (_assemblies.Length == 0)
             {
-                configuration.Mappings(x => x.FluentMappings.AddFromAssembly(mappingAssembly));
+                configuration.Mappings(x => x.FluentMappings.AddFromAssembly(typeof(UserMap).Assembly));
                 return;
             }
-           
+            //specify the base type to be of ientity
             var currentTypes = typeof(UserMap).Assembly.GetTypes().Where(s=>s.BaseType?.Name == typeof(ClassMapping<>).Name);
 
-            var types = mappingAssembly.GetTypes().Where(s=>s.BaseType.Name == typeof(ClassMap<>).Name);
+            var executingTypes = GetExecutingTypes();
 
             foreach(var currentType in currentTypes)
             {
-                var type = types.FirstOrDefault(t => t.BaseType?.GetGenericArguments()[0].GetInterfaces()[0] == currentType.BaseType?.GetGenericArguments()[0]);
-                if (type != null)
-                    configuration.Mappings(x=> x.FluentMappings.Add(type));
+                var executingType = executingTypes.FirstOrDefault(t => t.BaseType?.GetGenericArguments()[0]?.GetInterfaces()[0] == currentType.BaseType?.GetGenericArguments()[0]);
+                if (executingType != null)
+                    configuration.Mappings(x=> x.FluentMappings.Add(executingType));
                 else
                 {
                     configuration.Mappings(x=>x.FluentMappings.Add(currentType));
@@ -78,7 +78,19 @@ namespace TasksLibrary.DB
             }
         }
 
+        private IEnumerable<Type> GetExecutingTypes()
+        {
+            IEnumerable<Type> executingTypes = null;
+            foreach (var assemby in _assemblies)
+            {
+                var currentAssembly = Assembly.Load(_assemblies[0]);
+                executingTypes = currentAssembly.GetTypes().Where(s => s.BaseType?.Name == typeof(ClassMap<>).Name);
+                if (executingTypes != null)
+                     break;
+            }
+            return executingTypes;
+        }
 
-        private readonly Assembly mappingAssembly;
+        private readonly string[] _assemblies;
     }
 }

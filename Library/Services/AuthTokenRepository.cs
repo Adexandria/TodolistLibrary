@@ -7,17 +7,17 @@ using TasksLibrary.Models.Interfaces;
 
 namespace TasksLibrary.Services
 {
-    public class AuthTokenRepository : AuthService
+    public class AuthTokenRepository : IAuthToken
     {
         public AuthTokenRepository(string encryptionKey = null)
         {
             _encryptionKey = encryptionKey ?? "SecretKeyTaskApplication@1345";
         }
 
-        public override string TokenEncryptionKey => _encryptionKey 
+        public string TokenEncryptionKey => _encryptionKey 
             ?? throw new NullReferenceException("Token encryption key can't be null");
 
-        public override string GenerateAccessToken(Dictionary<string, object> claims,int timeInMinutes)
+        public string GenerateAccessToken(Dictionary<string, object> claims,int timeInMinutes)
         {
             var securityTokenDescriptor = new SecurityTokenDescriptor
             {
@@ -33,7 +33,7 @@ namespace TasksLibrary.Services
             return token;
         }
 
-        public override string GenerateRefreshToken(int tokenSize)
+        public string GenerateRefreshToken(int tokenSize)
         {
             var randomNumber = new byte[tokenSize];
 
@@ -44,7 +44,7 @@ namespace TasksLibrary.Services
             return refreshtoken;
         }
 
-        public override ClaimsPrincipal VerifyToken(string token)
+        public ClaimsPrincipal VerifyToken(string token)
         {
             TokenValidationParameters tokenValidationParameters = GetTokenValidationParameters();
 
