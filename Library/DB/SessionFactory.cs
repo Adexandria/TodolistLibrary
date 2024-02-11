@@ -61,7 +61,7 @@ namespace TasksLibrary.DB
                 configuration.Mappings(x => x.FluentMappings.AddFromAssembly(typeof(UserMap).Assembly));
                 return;
             }
-            //specify the base type to be of ientity
+            //specify the base type to be of ientity and throw an exception
             var currentTypes = typeof(UserMap).Assembly.GetTypes().Where(s=>s.BaseType?.Name == typeof(ClassMapping<>).Name);
 
             var executingTypes = GetExecutingTypes();

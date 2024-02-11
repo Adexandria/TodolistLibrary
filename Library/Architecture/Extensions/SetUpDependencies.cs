@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using System.Reflection;
 using TasksLibrary.Application.Commands.CreateUser;
+using TasksLibrary.Architecture.Database;
+using TasksLibrary.Models;
 using TasksLibrary.Models.Interfaces;
 using TasksLibrary.Services;
 using TasksLibrary.Utilities;
@@ -31,6 +33,11 @@ namespace TasksLibrary.Architecture.Extensions
                 .As<IPasswordManager>()
                 .InstancePerLifetimeScope();
 
+            builder.RegisterType<QueryContext<Note>>()
+                .PropertiesAutowired()
+                .InstancePerLifetimeScope();
+
+            //Specify the types to register commandhandler,query, query handler and commands
             builder.RegisterAssemblyTypes(typeof(CreateUserCommandHandler).Assembly)
                .AsImplementedInterfaces()
                .PropertiesAutowired()
@@ -49,13 +56,15 @@ namespace TasksLibrary.Architecture.Extensions
 
             builder.Register(typeof(IAuthToken), assemblies);
 
+            builder.Register(typeof(Query<>),assemblies);
+
             return builder;
         }
 
         private static void Register(this ContainerBuilder builder, Type dependencyType, string[] assemblies)
         {
-            var currentTypes = Assembly.GetExecutingAssembly().GetTypes().Where(s => s.IsGenericType
-            && s.IsInterface && s.BaseType?.GetGenericArguments()[0] == dependencyType);
+            var types = Assembly.GetExecutingAssembly().GetTypes();
+            var currentTypes = Assembly.GetExecutingAssembly().GetTypes().Where(s => s.BaseType?.GetInterfaces()[0] == dependencyType);
 
             foreach (var type in currentTypes)
             {

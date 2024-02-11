@@ -30,10 +30,6 @@ namespace TasksLibrary.Architecture.Application
                 .PropertiesAutowired()
                 .SingleInstance();
 
-            builder.RegisterType<QueryContext<Note>>()
-                .PropertiesAutowired()
-                .InstancePerLifetimeScope();
-
             builder.RegisterType<AccessManagement>()
                 .PropertiesAutowired()
                .InstancePerLifetimeScope();
@@ -58,6 +54,9 @@ namespace TasksLibrary.Architecture.Application
                 return factoryInstance.Session;
             }).As<ISession>().InstancePerLifetimeScope();
 
+            builder.Register((o) => new DefaultConfiguration(useDefaultConfiguration))
+                .As<DefaultConfiguration>()
+                .InstancePerLifetimeScope();
 
             if (!useDefaultConfiguration && assemblies.Length > 0)
             {
