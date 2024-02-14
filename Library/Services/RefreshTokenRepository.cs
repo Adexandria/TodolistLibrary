@@ -10,6 +10,14 @@ namespace TasksLibrary.Services
         public RefreshTokenRepository(ISession session) : base(session)
         {
         }
+        public async Task Delete(Guid entityId)
+        {
+            var entity = await Session.Query<RefreshToken>().FirstOrDefaultAsync(s => s.Id == entityId);
+            if (entity != null) 
+            { 
+                await Delete(entity);
+            }
+        }
 
         public async Task<UserId> GetUserByRefreshToken(string refreshToken)
         {

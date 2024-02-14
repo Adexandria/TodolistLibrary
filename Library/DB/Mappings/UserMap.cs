@@ -2,7 +2,7 @@
 
 namespace TasksLibrary.DB.Mappings
 {
-    public class UserMap : ClassMapping<IUser>
+    public class UserMap : ClassMapping<User>
     {
         public UserMap()
         {
@@ -13,8 +13,14 @@ namespace TasksLibrary.DB.Mappings
             Map(s => s.LastName);
             Map(s => s.PasswordHash);
             Map(s => s.Salt);
-            References(s => s.AccessToken).Cascade.All();
-            References(s => s.RefreshToken).Cascade.All();
+            Component(m => m.RefreshTokenId, p =>
+            {
+                p.Map(s => s.Id, "RefreshToken_id");
+            });
+            Component(m => m.AccessTokenId, p =>
+            {
+                p.Map(s => s.Id, "AccessToken_id");
+            });
         }
     }
 }

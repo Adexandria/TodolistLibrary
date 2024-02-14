@@ -9,12 +9,7 @@ namespace TasksLibrary.Services
 {
     public class AuthTokenRepository : IAuthToken
     {
-        public AuthTokenRepository(string encryptionKey = null)
-        {
-            _encryptionKey = encryptionKey ?? "SecretKeyTaskApplication@1345";
-        }
-
-        public string TokenEncryptionKey => _encryptionKey 
+        public string TokenEncryptionKey => "SecretKeyTaskApplication@1345"
             ?? throw new NullReferenceException("Token encryption key can't be null");
 
         public string GenerateAccessToken(Dictionary<string, object> claims,int timeInMinutes)
@@ -75,7 +70,5 @@ namespace TasksLibrary.Services
                 IssuerSigningKey = GetSymmetricSecurityKey()
             };
         }
-
-        private readonly string _encryptionKey;
     }
 }

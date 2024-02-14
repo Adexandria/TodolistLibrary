@@ -3,7 +3,7 @@ using TasksLibrary.Models;
 
 namespace TasksLibrary.DB.Mappings
 {
-    public class NoteMap : ClassMapping<INote>
+    public class NoteMap : ClassMapping<Note>
     {
         public NoteMap()
         {

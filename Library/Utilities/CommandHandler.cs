@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using NHibernate;
+using System.Net;
 using TasksLibrary.Architecture.Database;
 
 namespace TasksLibrary.Utilities
@@ -65,6 +66,7 @@ namespace TasksLibrary.Utilities
 
     public abstract class CommandHandler<TDbcontext>
     {
+        public MapCommand MapCommand { get; set; }
         public TDbcontext Dbcontext { get; set; }
     }
 

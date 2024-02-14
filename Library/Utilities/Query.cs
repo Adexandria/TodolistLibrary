@@ -7,9 +7,12 @@ namespace TasksLibrary.Utilities
         public abstract ActionResult Validate();
     }
 
-    public interface IQuery<TResponse> : IValidator
+    public interface IQuery<TResponse> : IQuery
     {
 
     }
+
+    public interface IQuery : IValidator { }
+
 
 }

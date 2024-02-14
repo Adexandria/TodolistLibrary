@@ -16,12 +16,12 @@ namespace TasksLibrary.Application.Commands.Login
             {
                 return FailedOperation("Invalid password or email", HttpStatusCode.BadRequest);
             }
-         
 
-            if (authenticatedUser.AccessToken != null && authenticatedUser.RefreshToken != null)
+
+            if (authenticatedUser.AccessTokenId  != null && authenticatedUser.RefreshTokenId != null)
             {
-               await Dbcontext.Context.RefreshTokenRepository.Delete(authenticatedUser.RefreshToken);
-               await Dbcontext.Context.AccessTokenRepository.Delete(authenticatedUser.AccessToken);
+                await Dbcontext.Context.RefreshTokenRepository.Delete(authenticatedUser.RefreshTokenId.Id);
+                await Dbcontext.Context.AccessTokenRepository.Delete(authenticatedUser.AccessTokenId.Id);
             }
 
 
@@ -38,8 +38,13 @@ namespace TasksLibrary.Application.Commands.Login
             var accessTokenModel = new AccessToken(accessToken, new UserId(authenticatedUser.Id));
             var refreshTokenModel = new RefreshToken(refreshToken, DateTime.Now.AddDays(1), new UserId(authenticatedUser.Id));
 
-            authenticatedUser.AccessToken = accessTokenModel;   
-            authenticatedUser.RefreshToken = refreshTokenModel;
+            await Dbcontext.Context.RefreshTokenRepository.Add(refreshTokenModel);
+
+            await Dbcontext.Context.AccessTokenRepository.Add(accessTokenModel);
+
+            authenticatedUser.AccessTokenId = new AccessTokenId(accessTokenModel.Id);
+
+            authenticatedUser.RefreshTokenId = new RefreshTokenId(accessTokenModel.Id);
 
             await Dbcontext.Context.UserRepository.Update(authenticatedUser);
 

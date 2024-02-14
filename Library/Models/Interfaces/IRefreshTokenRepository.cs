@@ -9,6 +9,7 @@ namespace TasksLibrary.Models.Interfaces
 {
     public interface IRefreshTokenRepository : IRepository<IRefreshToken>
     {
+        Task Delete(Guid entityId);
         Task<UserId> GetUserByRefreshToken(string refreshToken);
     }
 }

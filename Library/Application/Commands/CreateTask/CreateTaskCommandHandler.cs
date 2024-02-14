@@ -15,7 +15,7 @@ namespace TasksLibrary.Application.Commands.CreateTask
             if (currentUser == null)
                 return FailedOperation("User doesn't exist",System.Net.HttpStatusCode.NotFound);
 
-            var newNote = command.MapToEntity<CreateTaskCommand,INote>();
+            var newNote = MapCommand.MapToEntity<CreateTaskCommand,INote>(command);
 
             if (!string.IsNullOrEmpty(command.Description))
                     newNote.Description = command.Description;

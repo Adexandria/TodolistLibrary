@@ -1,12 +1,7 @@
 ﻿using NHibernate;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TasksLibrary.Models;
 using TasksLibrary.Models.Interfaces;
-using TasksLibrary.DB;
+using NHibernate.Linq;
 
 namespace TasksLibrary.Services
 {
@@ -16,6 +11,13 @@ namespace TasksLibrary.Services
         {
         }
 
-       
+        public async Task Delete(Guid entityId)
+        {
+            var entity = await Session.Query<AccessToken>().FirstOrDefaultAsync(s => s.Id == entityId);
+            if (entity != null)
+            {
+                await Delete(entity);
+            }
+        }
     }
 }

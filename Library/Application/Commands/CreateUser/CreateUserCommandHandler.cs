@@ -23,7 +23,7 @@ namespace TasksLibrary.Application.Commands.CreateUser
 
             var hashedPassword = PasswordManager.HashPassword(command.Password, out string salt);
 
-            IUser newUser = command.MapToEntity<CreateUserCommand, IUser>();
+            IUser newUser = MapCommand.MapToEntity<CreateUserCommand, IUser>(command);
 
             newUser.PasswordHash = hashedPassword;
             newUser.Salt = salt;
