@@ -7,6 +7,7 @@ using TasksLibrary.Application.Commands.Login;
 using TasksLibrary.Application.Commands.UpdateTask;
 using TasksLibrary.Application.Commands.VerifyToken;
 using TasksLibrary.Architecture.Application;
+using TasksLibrary.Client.Services;
 using TasksLibrary.Services;
 
 namespace TasksLibrary.Client
@@ -18,9 +19,9 @@ namespace TasksLibrary.Client
             Container = container;
             Application = application;
         }
-        public async Task<dynamic> CreateUser(CreateUserCommand command)
+        public async Task<dynamic> CreateUser(CreateClientCommand command)
         {
-            var response = await Application.ExecuteCommand<CreateUserCommand, CreateUserDTO>(Container, command);
+            var response = await Application.ExecuteCommand<CreateClientCommand, CreateUserDTO>(Container, command);
             if (response.NotSuccessful)
                 return response.Errors[0];
             return response.Data;

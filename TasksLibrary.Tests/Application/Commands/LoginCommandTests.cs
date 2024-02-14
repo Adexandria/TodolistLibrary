@@ -49,8 +49,8 @@ namespace TasksLibrary.Tests.Application.Commands
 
             var claims = new Dictionary<string, object>() { { "id", user.Id } };
             user.Id = Guid.NewGuid();
-            user.AccessToken = new AccessToken("accessToken", new UserId(user.Id));
-            user.RefreshToken = new RefreshToken("refreshToken", DateTime.Now.AddDays(3), new UserId(user.Id));
+            /*user.AccessToken = new AccessToken("accessToken", new UserId(user.Id));
+            user.RefreshToken = new RefreshToken("refreshToken", DateTime.Now.AddDays(3), new UserId(user.Id));*/
             DbContext.Setup(s => s.Context.UserRepository.AuthenticateUser(Command.Email, Command.Password)).ReturnsAsync(user);
             DbContext.Setup(s => s.Context.RefreshTokenRepository.Delete(It.IsAny<RefreshToken>()));
             DbContext.Setup(s => s.Context.AccessTokenRepository.Delete(It.IsAny<AccessToken>()));
@@ -76,8 +76,8 @@ namespace TasksLibrary.Tests.Application.Commands
             var user = new User("ade","ade", "ade");
             user.Id = Guid.NewGuid();
             var claims = new Dictionary<string, object>() { { "id", user.Id } };
-            user.AccessToken = new AccessToken("accessToken", new UserId(user.Id));
-            user.RefreshToken = new RefreshToken("refreshToken", DateTime.Now.AddDays(3), new UserId(user.Id));
+            /*user.AccessToken = new AccessToken("accessToken", new UserId(user.Id));
+            user.RefreshToken = new RefreshToken("refreshToken", DateTime.Now.AddDays(3), new UserId(user.Id));*/
             DbContext.Setup(s => s.Context.UserRepository.AuthenticateUser(Command.Email, Command.Password)).ReturnsAsync(user);
             DbContext.Setup(s => s.Context.RefreshTokenRepository.Delete(It.IsAny<RefreshToken>()));
             DbContext.Setup(s => s.Context.AccessTokenRepository.Delete(It.IsAny<AccessToken>()));

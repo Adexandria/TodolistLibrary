@@ -1,12 +1,5 @@
-﻿using FluentNHibernate.Conventions.Helpers;
-using FluentNHibernate.Mapping;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentNHibernate.Mapping;
 using TasksLibrary.Client.Model;
-using TasksLibrary.Models;
 
 namespace TasksLibrary.Client.Mapping
 {
@@ -23,8 +16,15 @@ namespace TasksLibrary.Client.Mapping
             Map(s => s.PasswordHash);
             Map(s => s.Salt);
             Map(s => s.AuthenticationType);
-            References(s => s.AccessToken).Cascade.All();
-            References(s => s.RefreshToken).Cascade.All();
+            Map(s=>s.UserName).Nullable();
+            Component(m => m.RefreshTokenId, p =>
+            {
+                p.Map(s => s.Id, "RefreshToken_id");
+            });
+            Component(m => m.AccessTokenId, p =>
+            {
+                p.Map(s => s.Id, "AccessToken_id");
+            });
         }
     }
 }
